@@ -1,0 +1,177 @@
+.left
+{
+    float: left;
+}
+.right
+{
+    float: right;
+   align-items: center;
+}
+.table td {
+  padding: 1.15rem;
+}
+.mat-card>.mat-divider-horizontal
+{
+  border-top-style: ridge;
+  margin-top: 5px;
+
+}
+.mat-card
+{ width: 100%;}
+.mat-card-content
+{
+    clear: both;
+    display: table;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.mat-card-header
+{
+    clear: both;
+    width: 100%;
+
+}
+.pull-right-time {
+  /*float: right !important;
+  position: relative;*/
+}
+.pull-left
+{
+  /*float: left !important;
+  padding-right: 15%;*/
+}
+
+
+.pull-right {
+  float: right!important;
+}
+.ellipsis {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+
+.panel {
+    /* margin-bottom: 20px; */
+    background-color: #fff;
+    /* border: 1px solid transparent; */
+    border-radius: 4px;
+    margin: 4px;
+    max-height: 45px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    /* box-shadow: 0 1px 1px rgba(0,0,0,.05); */
+}
+
+.panel-body {
+  padding: .7em;
+  word-wrap: break-word;
+  color: #373d42;
+  font-family: Ubuntu,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  -webkit-tap-highlight-color: transparent;
+  clear: both;
+  margin-bottom: 20px;
+  /* background-color: #fff; */
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.mat-card-actions
+{
+  padding-top:1%;
+  margin: 0;
+}
+
+.mat-card>.mat-card-actions
+{
+    /* margin-bottom: 22px; */
+
+}
+.mat-card
+{
+  margin-bottom:2%;
+}
+.example-card
+{
+
+  background-color: #f4f4f4;
+  border-radius: 2px;
+
+  overflow: hidden;
+  padding: 15px;
+  border: 1px solid #eee;
+  font-size: 14px;
+  line-height: 1.42857143;
+  -webkit-tap-highlight-color: transparent;
+}
+.content-row
+{
+    width: 100%;
+    display: blcok;
+}
+/* #rightTable
+{
+
+    align-items: center;
+    float: right;
+}
+#leftTable
+{
+    float: left;
+    align-items: center;
+} */
+
+#transcationId
+{
+    text-align: right;
+}
+#confirm
+{
+  background-color: #2fa4d7;
+
+}
+#coin
+{
+  background-color: #8dc429;
+}
+#fee
+{
+  box-sizing: border-box;
+  background-color: #ebebeb;
+  color: #333;
+}
+button
+{
+  display: inline-block;
+  padding: .7em 2em;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 100;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .45em;
+  line-height: 1.42857143;
+
+}
+
+button.btn-info
+{
+  padding: 0.1em 0.4em;
+
+}
+button.hide
+{
+  padding: 0.1em 0.4em;
+
+}
+.row-panel
+{
+  min-width: 1001px;
+  /* background-color: aqua; */
+  min-height: 120px;
+}

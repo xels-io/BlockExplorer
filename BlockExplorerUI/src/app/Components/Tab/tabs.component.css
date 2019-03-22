@@ -1,0 +1,13 @@
+.nav{
+    list-style: none;
+}
+.nav>li {
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+a:hover
+{
+    text-decoration: none;
+}

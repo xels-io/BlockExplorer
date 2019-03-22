@@ -1,0 +1,8 @@
+<!--
+<div [chart]="chart"></div> -->
+
+<chart [options]="options" (load)="saveChart($event.context)">
+  <series >
+    <point (select)="onPointSelect($event.context)" (click)="onPointClick($event.context)"></point>
+  </series>
+</chart>

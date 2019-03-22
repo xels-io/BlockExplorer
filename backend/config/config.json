@@ -1,0 +1,23 @@
+{   
+    "app": {
+        "port": 4000
+    },
+    "development": {
+        "config_id": "development",
+        "app_name": "my app",
+        "app_desc": "my app desc",
+        "node_port": 3000,
+        "json_indentation": 4,
+        "database": "exchangexels"
+    },
+    "testing": {
+        "config_id": "testing",
+        "database": "exchangexels"
+    },
+    
+    "production": {
+        "config_id": "production",
+        "node_port": 8080,
+        "database": "exchangexels"
+    }
+}

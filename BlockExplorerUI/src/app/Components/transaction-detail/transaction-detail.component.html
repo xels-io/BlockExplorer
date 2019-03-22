@@ -1,0 +1,83 @@
+
+<h2 mat-dialog-title>Transactions </h2>
+<mat-dialog-content class="mat-typography">
+    <table class="table table-striped" cellspacing="5">
+        <tbody>
+          <tr>
+            <td>ID</td>
+            <td> {{transDetail.txId}}</td>
+          </tr>
+          <tr >
+            <td>
+              <tr *ngFor="let in of transDetail.vIn; let i=index">{{in.address}}
+                <!-- <i class="fa fa-arrow-right" style="color:green"></i> -->
+              </tr>
+            </td>
+            <td>
+              <tr *ngFor="let out of transDetail.vOut;let i=index">
+                  {{out.address}}
+                <span class="pull-right">
+                    {{out.value / 100000000}}
+                </span>
+            </tr>
+          </td>
+          </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <tbody><tr>
+            <th colspan="2">Summary</th>
+        </tr>
+        <tr>
+            <td>Inputs</td>
+            <td>{{transDetail.inputs}}</td>
+        </tr>
+        <tr>
+          <td>Outputs</td>
+          <td>{{transDetail.outputs}}</td>
+        </tr>
+        <tr>
+          <td>Received Time</td>
+          <td>
+           {{transDetail.time}}
+          </td>
+        </tr>
+        <tr>
+          <td>Lock Time</td>
+          <td>
+            {{transDetail.lockTime}}
+          </td>
+        </tr>
+        <tr>
+          <td>Total Out</td>
+          <td>
+            {{transDetail.totalOut / 100000000}}
+          </td>
+        </tr>
+        <tr>
+          <td>Reward From Block</td>
+          <td>
+            <a href="/blocks/{{blockDetails.height}}">{{blockDetails.height}}</a>
+             <br>
+          </td>
+
+        </tr>
+        <tr>
+          <td>BlockReward</td>
+          <td>
+            {{blockDetails.blockReward}}
+             <br>
+          </td>
+        </tr>
+
+    </tbody>
+  </table>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
+
+

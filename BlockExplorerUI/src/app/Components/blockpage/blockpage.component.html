@@ -1,0 +1,61 @@
+
+<div style="margin: 2%;width: 100%; clear: both;" *ngIf="tableData!==undefined">
+    <h5 >
+        Details for Block #{{tableData.height}}
+      </h5>
+      <table class="table table-striped" id="transactionTableLeft" >
+        <tbody>
+          <tr>
+            <td><strong>Summary</strong></td>
+            <td></td>
+          </tr>
+          <tr>
+              <td>Number Of Transactions</td>
+              <td>{{tableData.transactions.length}}</td>
+          </tr>
+          <tr>
+              <td>Output Total</td>
+              <td>{{tableData.totalAmount}}</td>
+          </tr>
+          <tr>
+            <td>Block Reward</td>
+            <td>{{tableData.blockReward}}</td>
+        </tr>
+
+        <!-- <tr *ngFor="let item of gridService.blockData | keyvalue" >
+            <td> {{item.key}}</td>
+            <td>{{item.value}}</td>
+
+        </tr> -->
+        </tbody>
+    </table>
+      <table class="table table-striped" id="transactionTableRight" >
+          <tbody>
+            <tr>
+              <td>Hashes</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Hash</td>
+              <td>{{tableData.blockId}}</td>
+            </tr>
+            <tr>
+                <td>BlockTime</td>
+                <td>{{tableData.blockTime}}</td>
+            </tr>
+            <tr>
+                <td>Transaction Count</td>
+                <td>{{tableData.transactions.length}}</td>
+            </tr>
+            <tr></tr>
+            <tr></tr>
+          <!-- <tr *ngFor="let item of gridService.blockData | keyvalue" >
+              <td> {{item.key}}</td>
+              <td>{{item.value}}</td>
+
+          </tr> -->
+          </tbody>
+      </table>
+</div>
+
+

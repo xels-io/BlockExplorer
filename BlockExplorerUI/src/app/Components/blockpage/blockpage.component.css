@@ -1,0 +1,16 @@
+.table#transactionTableLeft
+{
+  font-family: inherit;
+  font-size: 14px;
+  width: 38%;
+  float: left !important;
+
+}
+.table#transactionTableRight
+{
+  font-family: inherit;
+  font-size: 14px;
+  float: Right !important;
+  width:40%;
+  margin-right: 4%;
+}

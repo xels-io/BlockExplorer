@@ -1,0 +1,130 @@
+<div style="margin: 2%;clear: both;" id="TransactionsDiv" *ngIf="cardData.length">
+  <h5>Transactions</h5>
+  <mat-card class="example-card" dynamicHeight="true" *ngFor="let item of cardData;let i=index">
+      <mat-card-header>
+      <mat-card-title>
+        <!-- <button id="showDiv">plus</button> -->
+        <mat-card-title id="transcationId">
+          <table class="table">
+              <tbody>
+                  <tr >
+                      <td colspan='5'>
+                        <button class="btn btn-info" (click)="toggle[i] = !toggle[i]">
+                          <i class="fa" aria-hidden="true" [ngClass]="toggle[i] ? 'fa-minus': 'fa-plus'" ></i>
+                        </button>
+                          <a (click)="openDialog(item)" class="ng-binding" style="color:#10ADE4;cursor: pointer;margin-left: 10px;">{{item.txId}}</a>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+
+                      <td></td>
+
+                      <td >
+                       <span class="pull-right"> {{ item.time}} </span>
+                      </td>
+
+                    </tr>
+              </tbody>
+          </table>
+
+        </mat-card-title>
+      </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+          <div *ngIf="item.vIn || item.vOut" class="row-panel">
+          <table>
+              <td *ngIf="item.vIn" style="clear: both;
+                min-height: 1px; max-width: 500px;min-width: 400px;">
+                <tr>
+                  <div class="panelLeft" *ngFor="let input of item.vIn" >
+                    <div class="transaction-vin-vout panel panel-default">
+                        <div class="panel-body">
+                        <div class="pull-right btc-value ng-binding" *ngIf="input.value" data-ng-class="{'text-danger': $root.currentAddr == vin.addr}">
+                            1 Xels
+                        </div>
+                        <div class="ellipsis">
+                            <span *ngIf="input.address" class="ng-binding ng-hide">
+                              <a href="transaction/{{input.address}}"  class="ng-binding">
+                                {{input.address}}
+                              </a>
+                              </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="PanelDetails" [hidden]="!toggle[i]">
+                      <div>
+                        <strong>Confirmations: </strong>
+                      </div>
+                      <div>
+                        <strong>ScriptSig : </strong><p class="text-muted">{{(input.scriptSig.length < 10)?input.scriptSig: input.scriptSig.substring(0,50)}}</p>
+                      </div>
+                    </div>
+
+                </div>
+                </tr>
+
+              </td>
+              <td *ngIf="item.vOut" style="clear: both; padding-left: 10%;">
+              <tr>
+                <div class="panelRight" *ngFor="let output of item.vOut" >
+                  <div class="transaction-vin-vout panel panel-default">
+
+                      <div class="panel-body">
+
+                      <div class="pull-right btc-value ng-binding" data-ng-class="{'text-danger': $root.currentAddr == vin.addr}" >
+                          <span >
+                              {{output.value /100000000 }} Xels
+                          </span>
+
+                      </div>
+                      <div class="ellipsis">
+                          <span *ngIf="output.address" class="ng-binding ng-hide">
+                            <a href="transaction/{{output.address}}"  class="ng-binding">
+                              {{output.address}}
+                            </a>
+                            </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="PanelDetailsRight" [hidden]="!toggle[i]">
+                      <div>
+                        <strong> Type: </strong><br>
+                      </div>
+                      <div>
+                        <strong> ScriptPubKey: </strong> {{output.scriptPubKey}}
+
+                      <br>
+                      </div>
+                  </div>
+                  <div class="PanelDetailsRight" [hidden]="!this.show">
+                  </div>
+              </div>
+              </tr>
+
+              </td>
+          </table>
+
+
+          </div>
+
+      </mat-card-content>
+      <!-- <mat-divider></mat-divider> -->
+      <mat-card-actions>
+        <div class="left">
+          <!-- <button id="fee" mat-button>Fee : </button> -->
+        </div>
+        <div class="right">
+            <button id="confirm" mat-button>{{dataIn.confirmations}} Confirmations</button>
+            <button id="coin" color="primary" mat-button>{{item.totalVOut  }} Xels</button>
+        </div>
+      </mat-card-actions>
+  </mat-card>
+  <br>
+</div>
+

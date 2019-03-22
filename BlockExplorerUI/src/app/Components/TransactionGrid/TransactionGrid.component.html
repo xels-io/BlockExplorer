@@ -1,0 +1,42 @@
+
+<table class="table " id="transactionTable" [mfData]="" #mf="mfDataTable" [mfRowsOnPage]="5" style="max-width:100%;">
+  <thead>
+  <tr>
+      <th>
+          <mfDefaultSorter by="txId">Transaction Id</mfDefaultSorter>
+      </th>
+      <th >
+          <mfDefaultSorter by="version">Version</mfDefaultSorter>
+      </th>
+      <th >
+          <mfDefaultSorter by="time">Time</mfDefaultSorter>
+      </th>
+      <th >
+          <mfDefaultSorter by="totalOut">Total Out</mfDefaultSorter>
+      </th>
+      <th >
+        <mfDefaultSorter by="">Detail</mfDefaultSorter>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr  *ngFor="let tx of gridService.transactionDetailsRow">
+      <td> {{tx.txId}}</td>
+      <td> {{tx.version}}  </td>
+      <td> {{tx.time}} </td>
+      <td> {{tx.totalOut}} </td>
+      <td id="app_address">
+
+        <app-address-grid [transactionInfo]="tx.vIn"  ></app-address-grid>
+        <app-address-grid [transactionInfo]="tx.vOut" ></app-address-grid>
+      </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+      <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+  </tr>
+  </tfoot>
+</table>

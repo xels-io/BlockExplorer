@@ -1,0 +1,29 @@
+<div class="col-sm-12" style="padding-bottom: 5%;">
+  <input type="text" style="float:right; margin-right:2%; clear: both;border-radius: 18px;" (input)='onSearchChange($event.target.value)' placeholder="Enter search string">
+</div>
+
+<div class="col-sm-12" style="padding-bottom: 1%;">
+
+    <ngx-datatable
+      #table
+      class='material'
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="15"
+      [rows]='rowTrans'
+      [selectionType]="'multi'"
+
+      >
+      <ngx-datatable-column name="Transaction Id" ></ngx-datatable-column>
+      <ngx-datatable-column name="Inputs" ></ngx-datatable-column>
+      <ngx-datatable-column name="Outputs" ></ngx-datatable-column>
+      <ngx-datatable-column name="Time" ></ngx-datatable-column>
+    </ngx-datatable>
+
+  </div>
+
+
+
+

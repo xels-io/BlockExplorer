@@ -1,0 +1,21 @@
+
+
+<table class="table table-striped" id="addressGrid"  >
+    <thead>
+    <tr>
+        <th>Address</th>
+        <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let v of transactionInfo">
+        <td> {{v.address}}  </td>
+        <td> {{v.value}}  </td>
+      </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+
+    </tr>
+    </tfoot>
+  </table>

@@ -1,10 +1,19 @@
 # BlockExplorerUI
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
+From within the BlockExplorerUI directory run:
+
+npm install
+Please make sure nodejs is installed in your device. Otherwise it won't find npm command.
+Download link of nodejs
+https://nodejs.org/en/download/
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Please make sure "@angular/cli" is installed in your device. Otherwise it won't find ng command.
+Command of angular/cli for installation
+npm install -g @angular/cli
 
 ## Code scaffolding
 

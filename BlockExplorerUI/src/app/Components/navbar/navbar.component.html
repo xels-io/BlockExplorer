@@ -1,34 +1,77 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<nav class="navbar navbar-light bg-light fixed-top">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top"><!-- bg-light -->
     <div class="container">
-      <div class="col-md-3 navbar-header">
-
-          <a class="navbar-brand" href="/"><img src="https://www.xels.io/assets/images/logo.png" style="height:18px;"/></a>
-      </div>
-      <div class="col-md-7 navbar-expand">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" routerLink="/">Blocks</a>
-            <a class="nav-item nav-link" routerLink="/transactions">Transactions</a>
-            <a class="nav-item nav-link" routerLink="/about" >About</a>
-            <a class="nav-item nav-link" routerLink="/contact" >Contact</a>
-            <a class="nav-item nav-link" href="https://www.xels.io/" >Xels.IO</a>
-           <!-- <a class="nav-item nav-link" href="#">Tour</a> -->
-          </div>
+        <a class="navbar-brand" href="/">
+            <svg class="nav-logo" width="106" height="44" viewBox="0 0 106 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M54.4639 6.10864V0.810913C42.8645 0.810913 33.4602 10.2984 33.4602 22.0018C33.4602 33.7046 42.8639 43.1933 54.4639 43.1933V37.895C46.6587 37.895 40.1836 32.167 38.9328 24.651H49.213V19.3532H38.9328C40.1836 11.8366 46.6587 6.10864 54.4639 6.10864Z" fill="white"/>
+                <path d="M36.3773 43.2905L12.554 0.712524L6.91357 0.810913L30.932 43.3889L36.3773 43.2905Z" fill="white"/>
+                <path d="M4.67752 0.712524L28.404 43.2905L25.5837 43.1933L1.95422 0.810913L4.67752 0.712524Z" fill="white"/>
+                <path d="M85.9704 37.895L83.3446 43.1933H92.5339C99.0586 43.1933 104.349 37.8565 104.349 31.273C104.349 24.6889 99.0592 19.3532 92.5339 19.3532C88.9093 19.3532 85.9704 16.3881 85.9704 12.7312C85.9704 9.07375 88.9093 6.10925 92.5339 6.10925V0.810913C86.0091 0.810913 80.7194 6.14653 80.7194 12.7306C80.7194 19.3135 86.0085 24.651 92.5339 24.651C96.1585 24.651 99.098 27.6155 99.098 31.273C99.098 34.9299 96.1585 37.895 92.5339 37.895H85.9704Z" fill="white"/>
+                <path d="M70.9752 37.895C75.3382 34.012 78.0936 28.3335 78.0936 22.0018C78.0936 10.2984 68.6898 0.810913 57.0898 0.810913V6.10864C65.7897 6.10864 72.8426 13.2238 72.8426 22.0018C72.8426 30.7792 65.7897 37.895 57.0898 37.895V43.1933L80.8168 42.9965L83.6358 37.601L70.9752 37.895Z" fill="white"/>
+                <path d="M25.0313 18.6554L36.0855 0.810913H30.8346L22.5442 14.1942L25.0313 18.6554Z" fill="white"/>
+                <path d="M14.2533 27.5782L4.58063 43.1934H9.83096L16.7403 32.04L14.2533 27.5782Z" fill="white"/>
+            </svg>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/">Blocks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/transactions">Transactions</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/richAddress">Rich List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/contact">Contact</a>
+                </li>
+                <!--
+                <li class="nav-item dropdown dropdown-nav-item">
+                    <a href="#" class="nav-link dropdown-toggle dropdown-nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Links <span class="caret"></span><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="nav-link dropdown-item" href="#">Privacy Policy</a></li>
+                        <li><a class="nav-link dropdown-item" href="#">Terms &amp; Conditions</a></li>
+                    </ul>
+                </li>
+                -->
+            </ul>
         </div>
-        <!-- <div class="navbar-expand ml-auto navbar-nav">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="https://github.com/beeman" target="_blank">
-              <i class="fa fa-github"></i>
-            </a>
-            <a class="nav-item nav-link" href="https://twitter.com/beeman_nl" target="_blank">
-              <i class="fa fa-twitter"></i>
-            </a>
-            <a class="nav-item nav-link" href="https://medium.com/@beeman" target="_blank">
-              <i class="fa fa-medium"></i>
-            </a>
-          </div>
-        </div> -->
+    </div>
+</nav>
+<script>
+    $(document).ready(function () {
+        // Menu Hide
+        $('.navbar-nav>li>.page-scroll').on('click', function () {
+            $('.navbar-collapse').collapse('hide');
+        });
+    });
+</script>
+<!--The content below is only a placeholder and can be replaced.-->
+<!--<nav class="navbar navbar-light bg-light fixed-top">
+    <div class="container">
+        <div class="col-md-3 navbar-header">
+
+            <a class="navbar-brand" href="/"><img src="../../../assets/image/logo-white.svg" style="height:18px;"/></a>
+        </div>
+        <div class="col-md-7 navbar-expand">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/">Blocks</a>
+                <a class="nav-item nav-link" routerLink="/transactions">Transactions</a>
+                <a class="nav-item nav-link" routerLink="/about" >About</a>
+                <a class="nav-item nav-link" routerLink="/contact" >Contact</a>
+                <a class="nav-item nav-link" href="https://www.xels.io/" >Xels.IO</a>
+                 <a class="nav-item nav-link" href="#">Tour</a>
+            </div>
+        </div>
+
 
     </div>
 
-  </nav>
+</nav>-->

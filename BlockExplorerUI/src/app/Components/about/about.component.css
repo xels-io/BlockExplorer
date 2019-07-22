@@ -1,0 +1,15 @@
+.about-us.content {
+    line-height: 3;
+    text-align: justify;
+}
+@media only screen and (max-width: 991px)  {
+    .theme-card .card-body {
+        padding: 2rem;
+    }
+    .about-us.content {
+        text-align: center;
+    }
+    .about-us-img {
+        margin-bottom: 2rem;
+    }
+}

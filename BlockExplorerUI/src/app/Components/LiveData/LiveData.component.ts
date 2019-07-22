@@ -1,27 +1,29 @@
-import { Component,  OnInit, ViewChild  } from '@angular/core';
+import { Component,  OnInit  } from '@angular/core';
 import { GridService } from '../../Services/Grid.service';
-// import { Observable, of } from 'rxjs';
-// import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { ViewCompileResult } from '@angular/compiler/src/view_compiler/view_compiler';
 import {interval} from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component ({
   selector: 'app-live-data',
   templateUrl: './LiveData.component.html',
   styleUrls: ['./LiveData.component.css']
 })
 export class LiveDataComponent implements OnInit  {
+  searchForm: FormGroup;
+  searchText: string;
+  addTaskValue = '';
   selctedRow: any = false;
- // @ViewChild(DatatableComponent) table: DatatableComponent;
-
     rows = [];
     selected = [];
-    temp: any[] = [];
     subs: any;
     restBlocks: any;
     cols = [];
+    searchFound = false;
+    notFound = false;
+    dataFound = false;
     socketData: any;
     lastHeight: any ;
+    searchVal: any = [] ;
     public BlockGridColumns = [
       { name: 'Block Id' },
       { name: 'Height' },
@@ -32,81 +34,120 @@ export class LiveDataComponent implements OnInit  {
       { name: 'BlockReward' }
     ];
     data = 'GetLastNBlockInfo';
-  constructor( private  gridService: GridService, private route: ActivatedRoute, private router: Router) {
-    this.cols = this.BlockGridColumns;
-  }
-  ngOnInit() {
-   // this.getBlockWithHeight();
-   // this.gridService.postMessage(this.data);
-    setTimeout(this.getTableData.bind(this), 50);
+    page: any = {
+      size:  0,
+      pageNumber:  0,
+      offset: 0,
+      totalElements: 0
+    };
+    searchPage: any = {
+      size:  0,
+      pageNumber:  0,
+      offset: 0,
+      totalElements: 0
+    };
 
+  constructor( private  gridService: GridService, private route: ActivatedRoute, private router: Router , ) {
+    this.cols = this.BlockGridColumns;
+    this.dataFound = true;
+  }
+
+
+   /** initialization starts
+    *
+    *
+    */
+  ngOnInit() {
+    this.pageCallback({ offset: 0 });
+    //this.getBlockExplorerTableData(this.page.pageNumber);
     interval(150000).subscribe(() => {
-      // console.log(this.lastHeight);
-      this.getRestData(this.lastHeight);
-    }
+      this.getRestBlockData(this.lastHeight);
+      }
     );
   }
+  /** initialization ends
+    *
+    *
+    */
 
-  getRestData(height) {
+  /**  get rest of blocks created later starts
+  *
+  *
+  */
+  getRestBlockData(height) {
     if (height !== undefined) {
       this.restBlocks = this.gridService.getRestNBlocks(height).subscribe((restResponse: any) => {
         if (restResponse.InnerMsg.length > 0) {
+          this.lastHeight = restResponse.InnerMsg[0].height;
           const m: any[] = this.gridService.getMappedData(restResponse.InnerMsg);
-          const result = m.concat(this.gridService.blockRowDataAll);
+          const mergeSearch = m.concat(this.rows);
+          const result = m.concat(this.rows);
           this.rows = result;
-          this.gridService.blockRowDataAll = this.rows;
-          this.temp = this.rows;
         }
       });
-
     }
   }
-  getTableData() {
-    this.subs = this.gridService.getAllBlocks().subscribe((response: any) => {
-      if (response.InnerMsg.length > 0) {
-        this.lastHeight = response.InnerMsg[0].height;
-        this.gridService.blockRowDataAll = response.InnerMsg;
-        this.rows = this.gridService.getMappedData(this.gridService.blockRowDataAll);
-        this.gridService.blockRowDataAll = this.rows;
+  /** get rest of blocks created later ends
+  *
+  *
+  */
+  /** get all created blocks information starts
+  *
+  *
+  */
+  getBlockExplorerTableData(page) {
+    this.subs = this.gridService.getAllPagesBlocks(page).subscribe((response: any) => {
+   // console.log(response.blocksArray[0].height);
+      if (response.blocksArray.length > 0) {
+        this.page.totalElements = response.totalLength;
+        this.dataFound = true;
+        this.lastHeight = response.blocksArray[0].height;
+       // this.gridService.blockRowDataAll = response.InnerMsg;
+        this.rows = this.gridService.getMappedData(response.blocksArray);
+       // this.gridService.blockRowDataAll = this.rows;
       }
-      this.temp = this.rows;
     });
   }
-  // onclick height of block live data table leads to details
-  onClick(searchTerm: any) {
+  /** get all created blocks information ends
+  *
+  *
+  */
+
+   /**
+   * Called whenever the user changes page starts
+   *
+   *
+   */
+   pageCallback(pageInfo: { count?: number, pageSize?: number, limit?: number, offset?: number }) {
+
+    this.page.pageNumber = pageInfo.offset + 1;
+    this.getBlockExplorerTableData(this.page.pageNumber);
+  }
+  /**
+   * Called whenever the user changes page ends
+   *
+   *
+   */
+   /**
+   * show details of block data table starts
+   *
+   *
+   */
+  blockHeightDetails(searchTerm: any) {
     this.gridService.blockData = searchTerm;
     this.router.navigate(['/blocks', searchTerm.height]);
     }
-// OnSelect method shows the selected transaction row in details
-  onSelect( {selected, rowP }) {
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
-    if (selected[0].transactions.length ) {
-      this.selctedRow = true;
-      this.gridService.transactionDetailsRow = selected[0].transactions.map((tmp) => {
-        return {
-          inputs: tmp.inputs,
-          lockTime: this.gridService.timeFormat(tmp.lockTime),
-          outputs: tmp.outputs,
-          time: this.gridService.timeFormat(tmp.time),
-          totalOut: this.totalOut(tmp.vOut) / 100000000,
-          txId: tmp.txId,
-          vIn: tmp.vIn,
-          vOut: tmp.vOut.length ? (tmp.vOut.map((vout) => {
-            return{
-              address : vout.address,
-              scriptPubKey : vout.scriptPubKey,
-              value : (vout.value / 100000000)
-            };
-          })) : tmp.vOut,
-          version: tmp.version
-        };
-      });
-
-    }
-  }
-  totalOut (vOut)
-  {
+   /**
+   * show details of block data table ends
+   *
+   *
+   */
+  /**
+   * total calculation of blocks totalOut starts
+   *
+   *
+   */
+  totalCalculation (vOut) {
     let total = 0;
       if (vOut.length > 1 ) {
         vOut.shift();
@@ -116,56 +157,71 @@ export class LiveDataComponent implements OnInit  {
             return total;
           }
         });
-      }
-      else
-        {
+      } else {
           total =  vOut[0].value;
           return total;
         }
 
   }
-  onActivate(event) {
-  }
-// Method displays the value according to search value
-  onSearchChange(serVal: any) {
+  /**
+   * total calculation of blocks totalOut ends
+   *
+   *
+   */
+   /**
+   * Method displays the value according to search input
+   *
+   *
+   */
+  searchOutput(serVal: any) {
+    const type = 'Blocks';
     const val: any  = serVal.toString().toLowerCase();
-    // get the amount of columns in the table
-     const datatoFind: any  = this.temp.filter((item: any) => {
-      // loop through each object
-      // tslint:disable-next-line:forin
-      for (const key in item) {
-        // tslint:disable-next-line:max-line-length
-          if (item[key].toString().toLowerCase().indexOf(val) !== -1) {
-            return item;
-          }
-         }
-        });
-        this.rows = datatoFind;
-       // this.table.offset = 0;
+    this.searchVal = this.gridService.searchRows(serVal, type).subscribe((response: any) => {
+      //console.log(response);
+      if (response.statusCode === 200 ) {
+          this.notFound = false;
+          this.dataFound = false;
+          this.searchFound = true;
+          this.rows = response.InnerMsg;
+         // this.searchPage.totalElements = response.InnerMsg.length;
+        } else {
+          this.notFound = true;
+          this.dataFound = false;
+          this.searchFound = false;
+        }
+    });
   }
+  /**
+   *  Clear Serach Input value and load data starts
+   *
+   *
+   */
+  clearSerachVal() {
+    if (this.searchText === '') {
+      console.log('nothing');
+    } else if (this.searchText !== '') {
+     // console.log('search');
+      this.page.pageNumber = 1;
+      this.searchText = '';
+      this.getBlockExplorerTableData(this.page.pageNumber);
+      this.dataFound = true;
+      this.searchFound = false;
+      this.notFound = false;
+    }
+  }
+  /**
+   *  Clear Serach Input value and load data ends
+   *
+   *
+   */
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {
     if (this.subs) {
       this.subs.unsubscribe();
     }
-    if (this.socketData) {
-      this.socketData.unsubscribe(); }
     if (this.restBlocks) {
       this.restBlocks.unsubscribe();
     }
   }
-// socket connection for live update
-  // getBlockWithHeight() {
-  //   this.socketData = this.gridService.getSocketData().subscribe(response => {
-  //      tslint:disable-next-line:max-line-length
-  //     if (this.gridService.blockRowDataAll && this.gridService.blockRowDataAll.length > 0) {
-  //       this.gridService.blockRowDataAll.unshift(response);
-  //       this.gridService.blockRowDataAll.pop();
-  //       this.gridService.blockRowDataAll = [...this.gridService.blockRowDataAll];
-  //       this.rows = this.gridService.blockRowDataAll;
-  //     }
-  //   });
-  // }
-
 
 }

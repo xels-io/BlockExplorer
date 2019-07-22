@@ -15,22 +15,12 @@ import { DataTableModule } from 'angular-6-datatable';
 import {BlockDetailModule} from '../Components/block-details/block-detail/block-detail.module';
 
 import { HomeComponent } from '../Components/home/home.component';
-import { TransactionGridComponent } from '../Components/TransactionGrid/TransactionGrid.component';
 import { LiveDataComponent } from '../Components/LiveData/LiveData.component';
-import { AddressGridComponent } from '../Components/AddressGrid/AddressGrid.component';
 
-import { FaqComponent } from '../Components/faq/faq.component';
 import { AboutComponent } from '../Components/about/about.component';
-import { MarketComponent } from '../Components/market/market.component';
-import { ChartComP } from '../Components/chart/chart.component';
+ import { FormsModule } from '@angular/forms';
 
 
-import { WalletsComponent } from '../Components/wallets/wallets.component';
-
-//import { ParticlesModule } from 'angular-particle';
-import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
-
-import {ChartModule} from 'angular2-highcharts';
 import { TransactionDetailComponent } from '../Components/transaction-detail/transaction-detail.component';
 declare var require: any;
 
@@ -41,18 +31,8 @@ declare var require: any;
 const COM_ARRAY =
     [
       HomeComponent,
-     // SearchComponent,
-      AddressGridComponent ,
-      TransactionGridComponent,
       LiveDataComponent,
-      FaqComponent,
       AboutComponent,
-      // TransactioncardComponent,
-      MarketComponent,
-      ChartComP,
-      WalletsComponent,
-     // TransactionDetailComponent
-      // BlockpageComponent,
     ];
 
 @NgModule({
@@ -60,27 +40,23 @@ const COM_ARRAY =
     COM_ARRAY
   ],
   imports: [
-    //ParticlesModule,
     CommonModule,
     NgxDatatableModule,
     DataTableModule,
     BlockDetailModule,
-
-    ChartModule
+    FormsModule
   ],
   exports: [
     COM_ARRAY,
     CommonModule,
-    //ParticlesModule,
     NgxDatatableModule,
     DataTableModule,
-    BlockDetailModule
+    BlockDetailModule,
+    FormsModule
+   
   ],
   providers: [
-    {
-      provide: HighchartsStatic,
-      useFactory: highchartsFactory
-    }
+
   ],
 })
 export class SharedModule {

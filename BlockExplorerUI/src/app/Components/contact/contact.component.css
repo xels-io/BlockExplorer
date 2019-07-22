@@ -1,0 +1,7 @@
+@media only screen and (max-width: 575px)  {
+    .contact-form .theme-form .form-control
+    {
+        padding: 1.5rem;
+        margin-bottom: 0;
+    }
+}

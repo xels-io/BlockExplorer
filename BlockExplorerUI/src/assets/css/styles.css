@@ -1,0 +1,278 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url("../fonts/Montserrat-Regular.ttf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url("../fonts/Montserrat-Light.ttf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url("../fonts/Montserrat-Bold.ttf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Montserrat-LightItalic';
+    src: url("../fonts/Montserrat-LightItalic.ttf") format("truetype");
+    font-weight: normal;
+}
+
+	/* background: $background
+} */
+
+
+
+.close-icon {
+  float:right;
+  margin-right:2%;
+  clear: both;
+  border:1px solid transparent;
+	background-color: transparent;
+	display: inline-block;
+	vertical-align: middle;
+  outline: 0;
+  cursor: pointer;
+}
+.close-icon{
+	position: relative;
+}
+.close-icon:after {
+	content: "X";
+	width: 15px;
+	height: 20px;
+	position: absolute;
+	background-color: #FA9595;
+	z-index:1;
+	right: 35px;
+	margin: auto;
+	border-radius: 50%;
+	text-align: center;
+	color: white;
+	font-weight: normal;
+	box-shadow: 0 0 2px #E50F0F;
+}
+
+#searchclear {
+  position: absolute;
+  right: 6px;
+  top: 0;
+  bottom: 18px;
+  height: 30px;
+  margin: auto;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+body {
+    background-color: #F1FDF0;
+    background-image: url(../image/header-bg.svg);
+    background-position: center top -20%;
+    background-repeat: no-repeat;
+    /*background-size: cover;*/
+    font-family: 'Montserrat-Regular';
+    font-size: 14px;
+    padding-top: 75px;
+}
+a {
+    color: #53B848;
+    text-decoration: none;
+}
+.color-green, .color-link {
+    color: #53B848 !important;
+}
+section a:hover, .color-green:hover, .color-link:hover,
+section a:active, .color-green:active, .color-link:active,
+section a:focus, .color-green:focus, .color-link:focus {
+    color: #218838 !important;
+}
+a, .btn, a:hover, .btn:hover {
+    -moz-transition: all 0.25s ease-in-out 0s;
+    -ms-transition: all 0.25s ease-in-out 0s;
+    -o-transition: all 0.25s ease-in-out 0s;
+    -webkit-transition: all 0.25s ease-in-out 0s;
+    transition: all 0.25s ease-in-out 0s;
+}
+.color-black {
+    color: #969696 !important;
+}
+section {
+    padding: 35px 0;
+}
+.title {
+    color: #FFFFFF;
+    font-family: 'Montserrat-Bold';
+    font-size: 48px;
+}
+section.home-section .datatable-body-cell a:hover,
+section.home-section .datatable-body-cell a:active,
+section.home-section .datatable-body-cell a:focus
+{
+    color: #53B848 !important;
+}
+.contact-form .theme-form .form-control,
+.contact-form .theme-form .form-control:hover,
+.contact-form .theme-form .form-control:focus
+{
+    border-color: #53B848;
+    background: transparent;
+    border-radius: 10px;
+    box-shadow: none;
+    color: #969696;
+    font-size: 14px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+.contact-form .theme-card .card-body {
+    padding: 1.25rem;
+}
+.theme-form.table-search .form-control,
+.theme-form.table-search .form-control:hover,
+.theme-form.table-search .form-control:focus,
+.theme-form.table-search .btn-secondary,
+.theme-form.table-search .btn-secondary:active,
+.theme-form.table-search .btn-secondary:hover,
+.theme-form.table-search .btn-secondary:focus,
+.theme-form.table-search .input-group .input-group-append .btn-secondary:active,
+.theme-form.table-search .input-group .input-group-append .btn-secondary
+{
+    border-color: #FFFFFF;
+    background: transparent;
+    border-radius: 25px;
+    box-shadow: none;
+    color: #FFFFFF;
+}
+.table-search .form-control::placeholder {
+    color: #FFFFFF !important;
+}
+.theme-form.table-search .input-group .form-control {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.theme-form.table-search .input-group .input-group-append .btn-secondary {
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.theme-form.table-search .input-group .input-group-append .btn-secondary {
+    background: transparent;
+}
+.theme-form.table-search .input-group .input-group-append .btn-secondary:hover {
+    box-shadow: none;
+}
+.theme-table .ngx-datatable.material {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 5px rgba(125, 125, 125, 0.4);
+    border-radius: 25px;
+}
+.theme-table {
+    color: #2F2F2F;
+}
+.theme-table .datatable-header-cell-label.draggable {
+    color: #969696;
+    font-family: 'Montserrat-Bold';
+}
+.theme-table .datatable-body-cell {
+    /*overflow-wrap: break-word;*/
+    vertical-align: middle;
+    color: #2F2F2F;
+}
+.theme-table .datatable-body-cell a {
+    color: #53B848;
+    cursor: pointer;
+}
+.ngx-datatable.material.single-selection .datatable-body-row.active,
+.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group,
+.ngx-datatable.material.multi-selection .datatable-body-row.active,
+.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group,
+.ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group
+{
+    background-color: #53B848;
+}
+.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-body-cell,
+.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group .datatable-body-cell,
+.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-body-cell,
+.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group .datatable-body-cell,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-body-cell,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group .datatable-body-cell,
+.ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group .datatable-body-cell
+{
+    color: #FFFFFF;
+}
+.ngx-datatable.material .datatable-footer .datatable-pager li.active a {
+    background-color: #53B848;
+    border-radius: 6px;
+    color: #FFFFFF;
+}
+.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-body-cell a,
+.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group .datatable-body-cell a,
+.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-body-cell a,
+.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group .datatable-body-cell a,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-body-cell a,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group .datatable-body-cell a,
+.ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group .datatable-body-cell a
+{
+    color: #FFFFFF;
+    font-family: 'Montserrat-Bold';
+}
+
+/* ==============
+   Other pages
+===============*/
+.header-padding {
+    padding: 80px 0;
+}
+.header-padding.with-table-search {
+    padding: 50px 0;
+}
+.theme-card {
+    border-radius: 25px;
+}
+.theme-card .card-header {
+    background-color: #FFFFFF;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+.theme-card .card-title {
+    color: #969696;
+    font-family: 'Montserrat-Bold';
+    padding: 10px 10px 0 10px;
+}
+.theme-card .card-body {
+    padding: 35px 60px 70px;
+}
+/* ==============
+   Media Query
+===============*/
+@media only screen and (max-width: 991px)  {
+
+}
+@media only screen and (max-width: 767px)  {
+    body {
+        background-position: center top;
+    }
+    .title {
+        font-size: 32px;
+    }
+    .header-padding {
+        padding: 20px 0;
+    }
+    .header-title{
+        padding-bottom: 0;
+    }
+}
+@media only screen and (max-width: 575px)  {
+}

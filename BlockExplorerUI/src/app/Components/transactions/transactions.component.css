@@ -1,0 +1,26 @@
+.ngx-datatable.material.single-selection .datatable-body-row.active,
+.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group,
+.ngx-datatable.material.multi-selection .datatable-body-row.active,
+.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
+    background-color: inherit !important;
+
+}
+.ngx-datatable.material.single-selection .datatable-body-row.active:hover,
+.ngx-datatable.material.single-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active:hover,
+.ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover .datatable-row-group {
+    background-color: inherit !important;
+}
+:host /deep/ .datatable-body-row.active .datatable-row-group {
+  background-color: #71d065 !important;
+  color: #fff;
+
+  }
+.ngx-datatable .datatable-body{
+  font-family: helvetica neue,Helvetica,Arial,sans-serif;
+}
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner
+{
+  background-color: #77cc6d;
+}

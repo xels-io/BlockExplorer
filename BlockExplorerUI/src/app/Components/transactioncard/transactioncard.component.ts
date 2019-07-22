@@ -25,28 +25,11 @@ export class TransactioncardComponent implements OnInit {
   constructor(private service: GridService,  private router: Router, public dialog: MatDialog) {
 
    }
-   openDialog(item) {
-     //  console.log(item);
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.data = item;
-      const dialogRef = this.dialog.open(TransactionDetailComponent,
-        {
-          width: '1000px',
-          data : dialogConfig
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        //console.log(`Dialog result: ${result}`);
-      });
-    }
-   toatalValCal(voutVal) {
-    let total = 0 ;
-    voutVal.map( (val) => {
-      total = (total + val.value) / 100000000;
-    });
-    return total ;
-  }
-
-  ngOnInit() {
+   /** initialization starts
+  *
+  *
+  */
+ ngOnInit() {
     if (this.service.blockData !== undefined) {
       this.height = this.service.blockData.height;
       this.dataIn = this.service.blockData;
@@ -63,14 +46,58 @@ export class TransactioncardComponent implements OnInit {
           vOut: Retval.vOut
         };
       });
-   //  console.log(this.cardData);
     }
   }
-  onDetail(item: any) {
-    //  console.log(item);
-    this.service.transaction = Object.assign(item);
-    this.router.navigate(['/transaction',   {transaction: item}]);
+  /** initialization ends
+  *
+  *
+  */
+  /**
+   *  transaction details info starts
+   *
+   *
+   */
+   openTransactionDetail(item) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = item;
+      const dialogRef = this.dialog.open(TransactionDetailComponent,
+        {
+          width: '1000px',
+          data : dialogConfig
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        //console.log(`Dialog result: ${result}`);
+      });
+    }
+  /**
+   *  transaction details info ends
+   *
+   *
+   */
+   /**
+   *  Total value calculation starts
+   *
+   *
+   */
+   toatalValCal(voutVal) {
+    let total = 0 ;
+    voutVal.map( (val) => {
+      total = (total + val.value) / 100000000;
+    });
+    return total ;
   }
+ /**
+   *  Total value calculation  ends
+   *
+   *
+   */
+
+
+  // onDetail(item: any) {
+  //   //  console.log(item);
+  //   this.service.transaction = Object.assign(item);
+  //   this.router.navigate(['/transaction',   {transaction: item}]);
+  // }
 
   toggle(i) {
   }

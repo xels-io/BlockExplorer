@@ -1,0 +1,45 @@
+<section class="header-title">
+    <div class="container">
+        <div class="title text-center">
+            Rich List!
+        </div>
+    </div>
+</section>
+<section class="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="table-search theme-form col-md-3 offset-md-9">
+                <div class="input-group mb-3">
+                    <input type="text" id="searchBox" class="form-control" placeholder="Search" [(ngModel)]="searchText" (keyup.enter)='searchAddress($event.target.value)'>
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button" (click)="clearSerachVal()">
+                          <i class="fa fa-times-circle"></i>
+                      </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="theme-table mb-4">
+                    <ngx-datatable *ngIf="allAddress" #table class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="10" [count]="page.totalElements" [rows]='richList' [offset]="page.offset" [selectionType]="'multi'"
+                        (page)="richListPageCall($event)">
+                        <ngx-datatable-column name="Address" [sortable]="true"></ngx-datatable-column>
+                        <ngx-datatable-column name="Amount" [sortable]="true"></ngx-datatable-column>
+                    </ngx-datatable>
+                    <ngx-datatable *ngIf="listFound" #table class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="10" [count]="page.totalElements" [rows]='richList' [offset]="searchPage.offset"
+                        [selectionType]="'multi'" (page)="richListPageCall($event)">
+                        <ngx-datatable-column name="Address" [sortable]="true"></ngx-datatable-column>
+                        <ngx-datatable-column name="Amount" [sortable]="true"></ngx-datatable-column>
+                    </ngx-datatable>
+                    <ngx-datatable *ngIf="listnotFound" class='material' #table class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="10" [count]="page.totalElements" [rows]='richList' [offset]="page.offset"
+                        [selectionType]="'multi'" (page)="richListPageCall($event)">
+                        <ngx-datatable-column name="Address"></ngx-datatable-column>
+                        <ngx-datatable-column name="Amount"></ngx-datatable-column>
+                    </ngx-datatable>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- [sorts]="[{prop: 'amount', dir: 'desc'}]" -->

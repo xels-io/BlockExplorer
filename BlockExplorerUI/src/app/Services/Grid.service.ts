@@ -1,23 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,  HttpHeaders , HttpParams   } from '@angular/common/http';
 import { Observable,  Subject, BehaviorSubject, } from 'rxjs';
-// import 'rxjs/add/operator/catch';
 import * as socketIo from 'socket.io-client';
 import { environment } from '../../environments/environment';
-// const httpOptions = {
-//   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-// };
+import * as moment from 'moment';
+
 @Injectable()
 export class GridService {
   public blockRowDataAll: any[];
   public blockRowData: any[];
-  public selectedBlockData: any[];
   public transactionDetailsRow: any[];
   public blockData: any;
   public baseApiUrl = environment.baseUrl;
   observer: any;
   public handle = new Subject ();
-  public dataStringSource = new Subject<string>();
   block: any = [];
   mapData: any[] = [];
   private msg = new BehaviorSubject<any>('defaily');
@@ -37,81 +33,134 @@ export class GridService {
   constructor(private http: HttpClient) {
     this.socket = socketIo(this.baseApiUrl);
    }
-  public getSocketData(): Observable <any> {
+  // public getSocketData(): Observable <any> {
+  //   console.log('socket from grid service');
+  //   this.socket.on('data', (res) => {
+  //     // tslint:disable-next-line:whitespace
+  //     if(res !== null) {
+  //       this.observer.next(res);
+  //        return res;
+  //     }
+  //   });
+  //   return this.createObservable();
+  // }
 
-    this.socket.on('data', (res) => {
-      // tslint:disable-next-line:whitespace
-      if(res !== null) {
-        this.observer.next(res);
-         return res;
-      }
-    });
-    return this.createObservable();
+  // createObservable(): Observable<number> {
+  //   return new Observable(observer => {
+  //     this.observer = observer;
+  //   });
+  // }
+  /** Get all api responses starts
+  *
+  *
+  */
+ public getResults(page: any): Observable<any> {
+       const prm: any = new HttpParams()
+       .set('URL', '/api/BlockExplorer/GetLastNBlockInfo')
+       .set('numberOfBlocks', page.blocks)
+       .set('pageNumber', page.pageNo)
+       .set('pageSize', page.pageSize);
+    return this.http.get<any>(this.baseApiUrl + '/GetAPIResponse', {params: prm});
+    }
+
+  /** Get all api responses ends
+  *
+  *
+  */
+  /** Get Search Values starts
+  *
+  *
+  */
+  public searchRows(val: any, type: any): Observable<any> {
+
+    const prm: any = new HttpParams()
+    .set('value', val)
+    .set('types', type);
+    return this.http.get<any>(this.baseApiUrl + '/getSearchVal' , {params: prm});
   }
-
-  createObservable(): Observable<number> {
-    return new Observable(observer => {
-      this.observer = observer;
-    });
-  }
-
-
+  /** Get Search Values ends
+  *
+  *
+  */
   // ......API calls Starts here ......
   // Get all blocks
   public getAllBlocks() {
     return this.http.get<any>(this.baseApiUrl + '/getAllBlock');
   }
-  //   Get rest new blocks
+  /** Get 10 blocks per page starts
+  *
+  *
+  */
+  public getAllPagesBlocks(page: any ): Observable<any> {
+    const perpage: any = 10;
+    const prm: any = new HttpParams().set('page', page).set('perPage', perpage);
+
+    return this.http.get<any>(this.baseApiUrl + '/getAllBlocksParams/page=' + page + '/perPage=' + perpage);
+  }
+  /** Get 10 blocks per page ends
+  *
+  *
+  */
+  /** Get 10 rich address list per page starts
+  *
+  *
+  */
+ public getAllRichAddressList(page: any ): Observable<any> {
+  const perpage: any = 10;
+  const prm: any = new HttpParams().set('page', page).set('perPage', perpage);
+  return this.http.get<any>(this.baseApiUrl + '/address/page=' + page + '/perPage=' + perpage);
+  }
+  /** Get 10 rich address list per page ends
+  *
+  *
+  */
+  /** Get rest new blocks starts
+  *
+  *
+  */
   getRestNBlocks(params: any): Observable<any> {
     // console.log('param');
     const prm: any = new HttpParams().set('URL', '/api/BlockExplorer/RestblockAppend').set('height', params);
     return this.http.get<any>(this.baseApiUrl + '/RestBlock', {params: prm});
   }
+  /** Get rest new blocks ends
+  *
+  *
+  */
   //   Get last number of blocks
   getLastNBlocks(params: any): Observable<any> {
     const prm: any = new HttpParams().set('URL', '/api/BlockExplorer/GetLastNBlockInfo').set('numberOfBlocks', params);
     return this.http.get<any>(this.baseApiUrl + '/GetAPIResponse', {params: prm});
   }
-  // Post Api call
+ /** Post Api call starts
+  *
+  *
+  */
   postMessage(msg: any): Observable<any> {
     const user: any = { id : 1, name : 'Hello'};
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const prm: any = new HttpParams().set('URL', '/api/BlockExplorer/PostMessage').set('msg', msg);
     return this.http.post<any>(this.baseApiUrl + '/PostAPIResponse', user, {headers: headers} );
   }
-  // getBlockByHeight() {
-  //   return this.http.get(this.baseApiUrl + '/api/blocks');
-  // }
+  /** Post Api call ends
+  *
+  *
+  */
   // ......API calls Ends here ......
-  public insertData(data: any) {
-    this.handle.next(data);
-  }
-  getData(): Observable<any> {
-     return this.handle.asObservable();
-  }
-  changeMessage(message: string) {
-    this.msg.next(message);
-  }
+
   // .....common Methods Start Here.....
-  // format time
+  // format time starts
 
   timeFormat (time) {
     const currentDate = new Date(time * 1000);
-    const date = currentDate.getDate() < 10 ? '0' + currentDate.getDate() : currentDate.getDate();
-    // tslint:disable-next-line:max-line-length
-    const month = (currentDate.getMonth() + 1) < 9 ? '0' + currentDate.getMonth() : currentDate.getMonth(); // Be careful! January is 0 not 1
-    const year = currentDate.getFullYear();
-    const timestamp = currentDate.getTime();
-    const hours = currentDate.getHours() < 10 ? '0' + currentDate.getHours() : currentDate.getHours();
-    const minutes = currentDate.getMinutes() < 10 ? '0' + currentDate.getMinutes() : currentDate.getMinutes();
-    const seconds = currentDate.getSeconds() < 10 ? '0' + currentDate.getSeconds() : currentDate.getSeconds();
-    const LTime = hours + ':' + minutes + ':' + seconds;
-    const dateString = date + '-' + month + '-' + year + ' ' + LTime;
+    let dateString = moment.utc(currentDate).format("DD-MM-YYYY HH:mm:ss");
     return dateString;
   }
+  /** format time ends
+  *
+  *
+  */
 
   public GetProofOfStakeReward( height) {
-   // this.rewardCal = 0;
    if (height === 0) {
         this.rewardCal = 0;
         return this.rewardCal;
@@ -141,9 +190,13 @@ export class GridService {
     }
   }
   // mapping data
+
+  /** mapping block data table starts
+  *
+  *
+  */
   getMappedData(blockRowDataAll) {
     this.GetProofOfStakeReward(blockRowDataAll[0].height);
-    let totalA =  0;
     this.mapData = blockRowDataAll.map((tmp) => {
     if (tmp.transactions.length > 1) {
       //  tmp.transactions.splice(1, 1);
@@ -176,10 +229,17 @@ export class GridService {
  });
    return this.mapData;
  }
+  /** mapping block data table ends
+  *
+  *
+  */
 
-// TotalAmount data calculation
+  /** TotalAmount data calculation starts
+  *
+  *
+  */
  getAmount(transaction) {
-  let y: any [] = this.getTransVal(transaction);
+  const y: any [] = this.getTransVal(transaction);
   let total = 0;
   if (y.length > 1) {
     y.splice(1, 1);
@@ -196,4 +256,9 @@ export class GridService {
   });
     return total;
   }
+ /** TotalAmount data calculation ends
+  *
+  *
+  */
+
 }

@@ -20,9 +20,11 @@ import { GridService } from './Services/Grid.service';
 import { FooterComponent } from './Components/Footer/footer.component';
 import { TransactionsComponent } from './Components/transactions/transactions.component';
 import { ContactComponent } from './Components/contact/contact.component';
+import { AddressAmountComponent } from './Components/address-amount/address-amount.component';
 // import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { RichAddressComponent } from './Components/rich-address/rich-address.component';
 @NgModule({
    declarations: [
       AppComponent,
@@ -30,14 +32,16 @@ import { ContactComponent } from './Components/contact/contact.component';
       FooterComponent,
       TransactionsComponent,
       ContactComponent,
+      AddressAmountComponent,
+      RichAddressComponent,
    ],
    imports: [
-
     HttpClientModule,
     HttpModule,
     BrowserModule,
     BrowserAnimationsModule,
     routingModule,
+    MatDialogModule,
     SharedModule.forRoot(),
 
    ],

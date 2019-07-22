@@ -1,0 +1,48 @@
+<section class="">
+    <div class="container">
+        <div class="theme-card card">
+            <div class="card-body">
+                <div class="card-title color-black">
+                    <h2>Transactions Value</h2>
+                </div>
+                <div class="row block-details"></div>
+                    <div class="col-12">
+                        <div class="card-title color-black">
+                            ID
+                        </div>
+                        <div class=" item mx-0 mb-3">
+                            <div class="">{{transDetail.txId}}</div>
+                        </div>
+
+                        <div class=" item mx-0 mb-3">
+                            <table class="table table-striped" id="addressGrid"  >
+                                <thead>
+                                <tr>
+                                    <th>Vout</th>
+                                    <th>Value</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let v of transDetail.vOut">
+                                    <td> {{v.address}}  </td>
+                                    <td> {{v.value }}  </td>
+                                  </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+
+                                </tr>
+                                </tfoot>
+                              </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<mat-dialog-actions align="end">
+    <button class="btn btn-success" mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
+
+

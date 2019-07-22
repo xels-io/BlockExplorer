@@ -1,28 +1,100 @@
-<div class="col-sm-12" style="padding-bottom: 5%;">
-  <input type="text" style="float:right; margin-right:2%; clear: both;border-radius: 18px;" (input)='onSearchChange($event.target.value)' placeholder="Enter search string">
-</div>
 
-<div class="col-sm-12" style="padding-bottom: 1%;">
-
-    <ngx-datatable
-      #table
-      class='material'
-      [columnMode]="'force'"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [rowHeight]="'auto'"
-      [limit]="15"
-      [rows]='rowTrans'
-      [selectionType]="'multi'"
-
-      >
-      <ngx-datatable-column name="Transaction Id" ></ngx-datatable-column>
-      <ngx-datatable-column name="Inputs" ></ngx-datatable-column>
-      <ngx-datatable-column name="Outputs" ></ngx-datatable-column>
-      <ngx-datatable-column name="Time" ></ngx-datatable-column>
-    </ngx-datatable>
-
+<section class="header-title">
+  <div class="container">
+      <div class="title text-center">
+        Transactions!
+      </div>
   </div>
+</section>
+<!-- <div class="col-sm-12" style="padding-bottom: 5%;">
+  <input type="text" style="float:right; margin-right:2%; clear: both;border-radius: 18px;" [(ngModel)]="searchText" (keyup.enter)='searchTransactions($event.target.value)' placeholder="Enter search string">
+  <span id="searchclear" class="close-icon" (click)="clearSerachVal()" ></span>
+</div> -->
+
+
+<section class="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="table-search theme-form col-md-3 offset-md-9">
+                <div class="input-group mb-3">
+                    <input type="text" id="searchBox" class="form-control" placeholder="Search"  [(ngModel)]="searchText" (keyup.enter)='searchTransactions($event.target.value)'>
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button" (click)="clearSerachVal()">
+                            <i class="fa fa-times-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="theme-table mb-4">
+                    <ngx-datatable *ngIf="allTransactionsFound"
+                        #table
+                        class='material'
+                        [columnMode]="'force'"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        [rowHeight]="'auto'"
+                        [limit]="15"
+                        [rows]='rowTrans'
+                        [selectionType]="'multi'"
+                        [externalPaging]="true"
+                        [count]="page.totalElements"
+                        [offset]="page.offset"
+                        [selectionType]="'multi'"
+                        (page)="transactionPage($event)"
+                        >
+                        <ngx-datatable-column name="Transaction Id" >
+                            <!-- <a (click)= openDialog(rowTrans)> {{rowTrans.txId}}</a> -->
+                          <!-- <a (click)="openDialog(rowTrans)" class="ng-binding color-link" style="color:#10ADE4;cursor: pointer;">{{rowTrans.txId}}</a> -->
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Inputs" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Outputs" > {{rowTrans.outputs}}</ngx-datatable-column>
+                        <ngx-datatable-column name="Time" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Details" >
+                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                <button class="btn btn-secondary" type="button" (click)="openDialogAddress(row)">
+                                    Details
+                                </button>
+                            </ng-template>
+
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                    <ngx-datatable *ngIf="transactionNotFound" class='material'
+                        [columnMode]="'force'"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        [rowHeight]="'auto'">
+                        <ngx-datatable-column name="Transaction Id" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Inputs" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Outputs" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Time" ></ngx-datatable-column>
+                    </ngx-datatable>
+                    <ngx-datatable *ngIf="transactionFound" class='material'
+                        [columnMode]="'force'"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        [limit]="15"
+                        [rows]='rowTrans'
+                        [offset]="searchPage.offset"
+                        [rowHeight]="'auto'">
+                        <ngx-datatable-column name="Transaction Id" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Inputs" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Outputs" > {{rowTrans.outputs}}</ngx-datatable-column>
+                        <ngx-datatable-column name="Time" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Details" >
+                          <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                              <button class="btn btn-secondary" type="button" (click)="openDialogAddress(row)">
+                                  Details
+                              </button>
+                          </ng-template>
+
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 

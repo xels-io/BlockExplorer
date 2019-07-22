@@ -1,83 +1,68 @@
-
-<h2 mat-dialog-title>Transactions </h2>
 <mat-dialog-content class="mat-typography">
-    <table class="table table-striped" cellspacing="5">
-        <tbody>
-          <tr>
-            <td>ID</td>
-            <td> {{transDetail.txId}}</td>
-          </tr>
-          <tr >
-            <td>
-              <tr *ngFor="let in of transDetail.vIn; let i=index">{{in.address}}
-                <!-- <i class="fa fa-arrow-right" style="color:green"></i> -->
-              </tr>
-            </td>
-            <td>
-              <tr *ngFor="let out of transDetail.vOut;let i=index">
-                  {{out.address}}
-                <span class="pull-right">
-                    {{out.value / 100000000}}
-                </span>
-            </tr>
-          </td>
-          </tr>
-        </tbody>
-    </table>
-    <table class="table table-striped">
-        <tbody><tr>
-            <th colspan="2">Summary</th>
-        </tr>
-        <tr>
-            <td>Inputs</td>
-            <td>{{transDetail.inputs}}</td>
-        </tr>
-        <tr>
-          <td>Outputs</td>
-          <td>{{transDetail.outputs}}</td>
-        </tr>
-        <tr>
-          <td>Received Time</td>
-          <td>
-           {{transDetail.time}}
-          </td>
-        </tr>
-        <tr>
-          <td>Lock Time</td>
-          <td>
-            {{transDetail.lockTime}}
-          </td>
-        </tr>
-        <tr>
-          <td>Total Out</td>
-          <td>
-            {{transDetail.totalOut / 100000000}}
-          </td>
-        </tr>
-        <tr>
-          <td>Reward From Block</td>
-          <td>
-            <a href="/blocks/{{blockDetails.height}}">{{blockDetails.height}}</a>
-             <br>
-          </td>
-
-        </tr>
-        <tr>
-          <td>BlockReward</td>
-          <td>
-            {{blockDetails.blockReward}}
-             <br>
-          </td>
-        </tr>
-
-    </tbody>
-  </table>
-
-
+    <section class="">
+        <div class="container">
+            <div class="theme-card card">
+                <div class="card-body">
+                    <div class="card-title color-black">
+                        <h2>Transactions</h2>
+                    </div>
+                    <div class="row block-details">
+                        <div class="col-12">
+                            <div class="card-title color-black">
+                                ID
+                            </div>
+                            <div class=" item mx-0 mb-3">
+                                <div class="">{{transDetail.txId}}</div>
+                            </div>
+                            <div class=" item mx-0 mb-3">
+                                <div class="" *ngFor="let in of transDetail.vIn; let i=index">{{in.address}}</div>
+                            </div>
+                            <div class=" item mx-0 mb-3">
+                                <div class="" *ngFor="let out of transDetail.vOut;let i=index">
+                                     {{out.address}}{{out.value / 100000000}}
+                            </div>
+                        </div>
+                        <div class="card-title color-black">
+                            Summary
+                        </div>
+                        <div class="row item mx-0 mb-3">
+                            <div class="col-md-3 p-0">Inputs</div>
+                            <div class="col-md-9 p-0 text-right">{{transDetail.inputs}}</div>
+                        </div>
+                        <div class="row item mx-0 mb-3">
+                            <div class="col-md-3 p-0">Outputs</div>
+                            <div class="col-md-9 p-0 text-right">{{transDetail.outputs}}</div>
+                        </div>
+                        <div class="row item mx-0 mb-3">
+                            <div class="col-md-3 p-0">Received Time</div>
+                            <div class="col-md-9 p-0 text-right">{{transDetail.time}}</div>
+                        </div>
+                        <div class="row item mx-0 mb-3">
+                            <div class="col-md-3 p-0">Lock Time</div>
+                            <div class="col-md-9 p-0 text-right">{{transDetail.lockTime}}</div>
+                        </div>
+                        <div class="row item mx-0 mb-3">
+                            <div class="col-md-3 p-0">Total Out</div>
+                            <div class="col-md-9 p-0 text-right">{{transDetail.totalOut / 100000000}}</div>
+                        </div>
+                        <div class="row item mx-0 mb-3">
+                            <div class="col-md-3 p-0">Reward From Block</div>
+                            <div class="col-md-9 p-0 text-right"><a href="/blocks/{{blockDetails.height}}">{{blockDetails.height}}</a></div>
+                        </div>
+                        <div class="row item mx-0 mb-3">
+                            <div class="col-md-3 p-0">BlockReward</div>
+                            <div class="col-md-9 p-0 text-right">{{blockDetails.blockReward}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Close</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+    <button class="btn btn-success mr-3" mat-button mat-dialog-close>Close</button>
+    <button class="btn btn-success" mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
 </mat-dialog-actions>
 
 

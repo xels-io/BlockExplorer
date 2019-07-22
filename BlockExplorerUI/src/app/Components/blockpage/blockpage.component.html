@@ -1,61 +1,56 @@
-
-<div style="margin: 2%;width: 100%; clear: both;" *ngIf="tableData!==undefined">
-    <h5 >
-        Details for Block #{{tableData.height}}
-      </h5>
-      <table class="table table-striped" id="transactionTableLeft" >
-        <tbody>
-          <tr>
-            <td><strong>Summary</strong></td>
-            <td></td>
-          </tr>
-          <tr>
-              <td>Number Of Transactions</td>
-              <td>{{tableData.transactions.length}}</td>
-          </tr>
-          <tr>
-              <td>Output Total</td>
-              <td>{{tableData.totalAmount}}</td>
-          </tr>
-          <tr>
-            <td>Block Reward</td>
-            <td>{{tableData.blockReward}}</td>
-        </tr>
-
-        <!-- <tr *ngFor="let item of gridService.blockData | keyvalue" >
-            <td> {{item.key}}</td>
-            <td>{{item.value}}</td>
-
-        </tr> -->
-        </tbody>
-    </table>
-      <table class="table table-striped" id="transactionTableRight" >
-          <tbody>
-            <tr>
-              <td>Hashes</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Hash</td>
-              <td>{{tableData.blockId}}</td>
-            </tr>
-            <tr>
-                <td>BlockTime</td>
-                <td>{{tableData.blockTime}}</td>
-            </tr>
-            <tr>
-                <td>Transaction Count</td>
-                <td>{{tableData.transactions.length}}</td>
-            </tr>
-            <tr></tr>
-            <tr></tr>
-          <!-- <tr *ngFor="let item of gridService.blockData | keyvalue" >
-              <td> {{item.key}}</td>
-              <td>{{item.value}}</td>
-
-          </tr> -->
-          </tbody>
-      </table>
-</div>
-
-
+<section class="header-title">
+    <div class="container">
+        <div class="title text-center">
+            Blockchain Explorer!
+        </div>
+    </div>
+</section>
+<section class="">
+    <div class="container">
+        <div class="theme-card card">
+            <div class="card-body">
+                <div *ngIf="tableData!==undefined">
+                    <div class="card-title color-black">
+                        <h4>Details for Block #{{tableData.height}}</h4>
+                    </div>
+                    <div class="row block-details">
+                        <div class="col-lg-5">
+                            <div class="card-title color-black">
+                                Summary
+                            </div>
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-9 p-0">Number Of Transactions</div>
+                                <div class="col-3 p-0 text-right">{{tableData.transactions.length}}</div>
+                            </div>
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-9 p-0">Output Total</div>
+                                <div class="col-3 p-0 text-right">{{tableData.totalAmount}}</div>
+                            </div>
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-9 p-0">Block Reward</div>
+                                <div class="col-3 p-0 text-right">{{tableData.blockReward}}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 offset-lg-2">
+                            <div class="card-title color-black">
+                                Hashes
+                            </div>
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-3 p-0">Hash</div>
+                                <div class="col-9 p-0">{{tableData.blockId}}</div>
+                            </div>
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-3 p-0">BlockTime</div>
+                                <div class="col-9 p-0">{{tableData.blockTime}}</div>
+                            </div>
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-3 p-0">Transaction Count</div>
+                                <div class="col-9 p-0">{{tableData.transactions.length}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

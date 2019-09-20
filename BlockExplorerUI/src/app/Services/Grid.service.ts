@@ -101,6 +101,20 @@ export class GridService {
   *
   *
   */
+ /** Get 10 transactions per page starts
+  *
+  *
+  */
+ public getTransactions(page: any ): Observable<any> {
+  const perpage: any = 10;
+  const prm: any = new HttpParams().set('page', page).set('perPage', perpage);
+
+  return this.http.get<any>(this.baseApiUrl + '/getTransactions/page=' + page + '/perPage=' + perpage);
+}
+/** Get 10 transactions per page ends
+*
+*
+*/
   /** Get 10 rich address list per page starts
   *
   *

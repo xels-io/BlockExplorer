@@ -58,11 +58,12 @@ export class TransactionsComponent implements OnInit {
   *
   */
   loadTransactionData (page) {
-    this.transaction = this.Service.getAllPagesBlocks(page).subscribe((response: any) => {
-      if (response.blocksArray.length > 0 ) {
+    this.transaction = this.Service.getTransactions(page).subscribe((response: any) => {
+      if (response.transactions.length > 0 ) {
         this.page.totalElements = response.transactionLength;
         this.allTransactionsFound = true;
-        this.transactionData(response.blocksArray );
+        
+        this.transactionData(response.transactions);
       }
     });
   }
@@ -75,12 +76,9 @@ export class TransactionsComponent implements OnInit {
   *
   *
   */
-   transactionData(blockRowDataAll) {
-    if (blockRowDataAll.length > 0 ) {
-      const result = blockRowDataAll.map(a => a.transactions);
-      this.transactionArray = [].concat.apply([], result);
-    }
-    this.rowTrans = this.transactionArray.map((tmp) => {
+   transactionData(transactionArray) {
+    this.rowTrans = transactionArray.map((tmp) => {
+      console.log(tmp)
       return {
         inputs: tmp.inputs,
         lockTime: this.Service.timeFormat(tmp.lockTime),

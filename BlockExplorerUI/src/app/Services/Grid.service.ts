@@ -11,6 +11,7 @@ export class GridService {
   public blockRowData: any[];
   public transactionDetailsRow: any[];
   public blockData: any;
+  
   public baseApiUrl = environment.baseUrl;
   observer: any;
   public handle = new Subject ();
@@ -105,11 +106,11 @@ export class GridService {
   *
   *
   */
- public getTransactions(page: any ): Observable<any> {
+ public getTransactions(page: any,searchValue: string ): Observable<any> {
   const perpage: any = 10;
   const prm: any = new HttpParams().set('page', page).set('perPage', perpage);
 
-  return this.http.get<any>(this.baseApiUrl + '/getTransactions/page=' + page + '/perPage=' + perpage);
+  return this.http.get<any>(this.baseApiUrl + '/getTransactions/page=' + page + '/perPage=' + perpage+'?search='+searchValue);
 }
 /** Get 10 transactions per page ends
 *

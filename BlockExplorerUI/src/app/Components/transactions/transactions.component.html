@@ -27,7 +27,7 @@
             </div>
             <div class="col-12">
                 <div class="theme-table mb-4">
-                    <ngx-datatable *ngIf="allTransactionsFound"
+                    <ngx-datatable
                         #table
                         class='material'
                         [columnMode]="'force'"
@@ -41,6 +41,7 @@
                         [count]="page.totalElements"
                         [offset]="page.offset"
                         [selectionType]="'multi'"
+                        [messages]="'No data found!'"
                         (page)="transactionPage($event)"
                         >
                         <ngx-datatable-column name="Transaction Id" >
@@ -58,37 +59,6 @@
                             </ng-template>
 
                         </ngx-datatable-column>
-                    </ngx-datatable>
-                    <ngx-datatable *ngIf="transactionNotFound" class='material'
-                        [columnMode]="'force'"
-                        [headerHeight]="50"
-                        [footerHeight]="50"
-                        [rowHeight]="'auto'">
-                        <ngx-datatable-column name="Transaction Id" ></ngx-datatable-column>
-                        <ngx-datatable-column name="Inputs" ></ngx-datatable-column>
-                        <ngx-datatable-column name="Outputs" ></ngx-datatable-column>
-                        <ngx-datatable-column name="Time" ></ngx-datatable-column>
-                    </ngx-datatable>
-                    <ngx-datatable *ngIf="transactionFound" class='material'
-                        [columnMode]="'force'"
-                        [headerHeight]="50"
-                        [footerHeight]="50"
-                        [limit]="15"
-                        [rows]='rowTrans'
-                        [offset]="searchPage.offset"
-                        [rowHeight]="'auto'">
-                        <ngx-datatable-column name="Transaction Id" ></ngx-datatable-column>
-                        <ngx-datatable-column name="Inputs" ></ngx-datatable-column>
-                        <ngx-datatable-column name="Outputs" > {{rowTrans.outputs}}</ngx-datatable-column>
-                        <ngx-datatable-column name="Time" ></ngx-datatable-column>
-                        <ngx-datatable-column name="Details" >
-                          <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                              <button class="btn btn-secondary" type="button" (click)="openDialogAddress(row)">
-                                  Details
-                              </button>
-                          </ng-template>
-
-                      </ngx-datatable-column>
                     </ngx-datatable>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { GridService } from 'src/app/Services/Grid.service';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 
 import { AddressAmountComponent } from '../address-amount/address-amount.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
@@ -32,14 +33,15 @@ export class TransactionsComponent implements OnInit {
   };
   transactionFound = false;
   transactionNotFound = false;
-  allTransactionsFound = false;
+  
   public TransactionColumns = [
     { name: 'Transaction Id' },
     { name: 'Inputs' },
     { name: 'Outputs' },
     { name: 'Time' }
   ];
-  constructor(private Service: GridService , public dialog: MatDialog) { }
+  public searchValue = '';
+  constructor(private Service: GridService , public dialog: MatDialog,private router: Router) { }
   /** initialization starts
   *
   *
@@ -58,10 +60,10 @@ export class TransactionsComponent implements OnInit {
   *
   */
   loadTransactionData (page) {
-    this.transaction = this.Service.getTransactions(page).subscribe((response: any) => {
+    this.transaction = this.Service.getTransactions(page,this.searchValue).subscribe((response: any) => {
       if (response.transactions.length > 0 ) {
         this.page.totalElements = response.transactionLength;
-        this.allTransactionsFound = true;
+        
         
         this.transactionData(response.transactions);
       }
@@ -124,20 +126,8 @@ export class TransactionsComponent implements OnInit {
    */
   searchTransactions(serVal: any) {
     let type = 'Transactions';
-    const val: any  = serVal.toString().toLowerCase();
-    this.searchTransactionValue = this.Service.searchRows(serVal, type).subscribe((response: any) => {
-      if (response.statusCode === 200 ) {
-          this.transactionNotFound = false;
-          this.allTransactionsFound = false;
-          this.transactionFound = true;
-          this.rowTrans = response.InnerMsg;
-         // this.searchPage.totalElements = response.InnerMsg.length;
-        } else {
-          this.transactionNotFound = true;
-          this.allTransactionsFound = false;
-          this.transactionFound = false;
-        }
-    });
+    this.searchValue = serVal;
+    this.loadTransactionData (1);
   }
    /**
    * Method displays the value according to search input ends
@@ -155,11 +145,9 @@ export class TransactionsComponent implements OnInit {
       console.log('nothing');
     } else if (this.searchText !== '') {
       this.searchText = '';
-      this.page.pageNumber = 1;
-      this.loadTransactionData(this.page.pageNumber);
-      this.allTransactionsFound = true;
-      this.transactionFound = false;
-      this.transactionNotFound = false;
+      this.searchValue = '';
+      this.loadTransactionData(1);
+      
     }
   }
    /**

@@ -2,7 +2,7 @@
 <section class="header-title">
   <div class="container">
       <div class="title text-center">
-        Transactions!
+        Transactions
       </div>
   </div>
 </section>
@@ -27,7 +27,7 @@
             </div>
             <div class="col-12">
                 <div class="theme-table mb-4">
-                    <ngx-datatable
+                    <ngx-datatable *ngIf="dataFound"
                         #table
                         class='material'
                         [columnMode]="'force'"
@@ -60,6 +60,17 @@
 
                         </ngx-datatable-column>
                     </ngx-datatable>
+
+                    <ngx-datatable *ngIf="dataFound==false" class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'">
+                        <ngx-datatable-column name="Block Id"></ngx-datatable-column>
+                        <ngx-datatable-column name="Height">
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Block Time"></ngx-datatable-column>
+                        <ngx-datatable-column name="BlockReward"></ngx-datatable-column>
+                        <ngx-datatable-column name="Total Amount"></ngx-datatable-column>
+                    </ngx-datatable>
+
+
                 </div>
             </div>
         </div>

@@ -19,6 +19,7 @@ export class TransactionsComponent implements OnInit {
   searchTransactionValue: any = [];
   transaction: any = [];
   transactionRows: any = [];
+  dataFound = false;
   searchPage: any = {
   size:  0,
   pageNumber:  0,
@@ -63,9 +64,10 @@ export class TransactionsComponent implements OnInit {
     this.transaction = this.Service.getTransactions(page,this.searchValue).subscribe((response: any) => {
       if (response.transactions.length > 0 ) {
         this.page.totalElements = response.transactionLength;
-        
-        
+        this.dataFound = true;
         this.transactionData(response.transactions);
+      }else{
+        this.dataFound = false;
       }
     });
   }
@@ -99,6 +101,9 @@ export class TransactionsComponent implements OnInit {
         version: tmp.version
       };
     });
+    if(this.rowTrans.length>0){
+        this.dataFound = true;
+    }
   }
   /** mapping of transaction data ends
   *

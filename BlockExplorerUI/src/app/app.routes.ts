@@ -8,9 +8,10 @@ import { TransactionDetailComponent } from './Components/transaction-detail/tran
 import { ContactComponent } from './Components/contact/contact.component';
 import { AddressAmountComponent } from './Components/address-amount/address-amount.component';
 import { RichAddressComponent } from './Components/rich-address/rich-address.component';
+import { BlockDetailsComponent } from './Components/block-details/block-details.component';
 
  const routes: Routes = [
-    { path: '', redirectTo: '/', pathMatch: 'full' },
+    // { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: '', component: HomeComponent},
     { path: 'transactions', component: TransactionsComponent },
     { path: 'richAddress', component: RichAddressComponent },
@@ -18,7 +19,8 @@ import { RichAddressComponent } from './Components/rich-address/rich-address.com
     { path: 'contact', component: ContactComponent },
     { path: 'transaction/:address', component: TransactionDetailComponent },
     { path: 'transaction/:txId', component: AddressAmountComponent },
-    { path: 'blocks/:height', loadChildren: './Components/block-details/block-detail/block-detail.module#BlockDetailModule'  },
+    { path: 'blocks/:height', component: BlockDetailsComponent }
+    // { path: 'blocks/:height', loadChildren: './Components/block-details/block-detail/block-detail.module#BlockDetailModule'  },
 
   ];
-  export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
+  export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);

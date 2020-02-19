@@ -36,7 +36,7 @@ export class LiveDataComponent implements OnInit  {
     data = 'GetLastNBlockInfo';
     page: any = {
       size:  0,
-      pageNumber:  0,
+      pageNumber:  1,
       offset: 0,
       totalElements: 0
     };
@@ -58,7 +58,9 @@ export class LiveDataComponent implements OnInit  {
     *
     */
   ngOnInit() {
-    this.pageCallback({ offset: 0 });
+    console.log(this.route.queryParams['value'].page)
+    this.page.pageNumber = (this.route.queryParams['value'].page)?this.route.queryParams['value'].page:1;
+    this.pageCallback({ offset: this.page.pageNumber-1 });
     //this.getBlockExplorerTableData(this.page.pageNumber);
     interval(150000).subscribe(() => {
       this.getRestBlockData(this.lastHeight);
@@ -118,10 +120,12 @@ export class LiveDataComponent implements OnInit  {
    *
    *
    */
-   pageCallback(pageInfo: { count?: number, pageSize?: number, limit?: number, offset?: number }) {
+   pageCallback(pageInfo) {
 
     this.page.pageNumber = pageInfo.offset + 1;
+    this.page.offset = pageInfo.offset;
     this.getBlockExplorerTableData(this.page.pageNumber);
+    this.router.navigateByUrl('?page='+this.page.pageNumber);
   }
   /**
    * Called whenever the user changes page ends
@@ -134,6 +138,7 @@ export class LiveDataComponent implements OnInit  {
    *
    */
   blockHeightDetails(searchTerm: any) {
+    console.log(searchTerm);
     this.gridService.blockData = searchTerm;
     this.router.navigate(['/blocks', searchTerm.height]);
     }

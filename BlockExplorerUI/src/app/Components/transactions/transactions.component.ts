@@ -4,7 +4,7 @@ import { GridService } from 'src/app/Services/Grid.service';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 
 import { AddressAmountComponent } from '../address-amount/address-amount.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
@@ -42,13 +42,14 @@ export class TransactionsComponent implements OnInit {
     { name: 'Time' }
   ];
   public searchValue = '';
-  constructor(private Service: GridService , public dialog: MatDialog,private router: Router) { }
+  constructor(private Service: GridService , public dialog: MatDialog,private route: ActivatedRoute,private router:Router) { }
   /** initialization starts
   *
   *
   */
   ngOnInit() {
-    this.transactionPage({ offset: 0 });
+    this.page.pageNumber = (this.route.queryParams['value'].page)?this.route.queryParams['value'].page:1;
+    this.transactionPage({ offset: this.page.pageNumber-1 });
    // this.transData();
    // this.loadTransactionData(this.page.pageNumber);
   }
@@ -117,7 +118,9 @@ export class TransactionsComponent implements OnInit {
    */
   transactionPage (pageInfo: { count?: number, pageSize?: number, limit?: number, offset?: number }) {
     this.page.pageNumber = pageInfo.offset + 1;
+    this.page.offset = pageInfo.offset;
     this.loadTransactionData(this.page.pageNumber);
+    this.router.navigateByUrl('transactions?page='+this.page.pageNumber);
   }
   /**
    * transactionPage is called whenever the user changes page ends

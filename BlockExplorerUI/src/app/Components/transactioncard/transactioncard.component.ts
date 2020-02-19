@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GridService } from 'src/app/Services/Grid.service';
 
 import {  Router } from '@angular/router';
@@ -14,7 +14,9 @@ import { TransactionDetailComponent } from '../transaction-detail/transaction-de
 })
 
 export class TransactioncardComponent implements OnInit {
-  cardData: any[] = [];
+
+  @Input() blockData;
+  @Input() cardData;
   InO: any ;
   dataIn: any;
   inputVal = false;
@@ -30,22 +32,11 @@ export class TransactioncardComponent implements OnInit {
   *
   */
  ngOnInit() {
-    if (this.service.blockData !== undefined) {
-      this.height = this.service.blockData.height;
-      this.dataIn = this.service.blockData;
-      this.cardData = this.service.blockData['transactions'].map( (Retval) => {
-        return {
-          inputs: Retval.inputs,
-          lockTime: this.service.timeFormat(Retval.lockTime) ,
-          outputs: Retval.outputs,
-          time: this.service.timeFormat(Retval.time), //1548407440,
-          totalOut : Retval.totalOut,
-          totalVOut:  this.toatalValCal(Retval.vOut),
-          txId: Retval.txId,
-          vIn: Retval.vIn,
-          vOut: Retval.vOut
-        };
-      });
+
+    if (this.blockData !== undefined) {
+      this.height = this.blockData.height;
+      this.dataIn = this.blockData;
+      
     }
   }
   /** initialization ends
@@ -79,13 +70,7 @@ export class TransactioncardComponent implements OnInit {
    *
    *
    */
-   toatalValCal(voutVal) {
-    let total = 0 ;
-    voutVal.map( (val) => {
-      total = (total + val.value) / 100000000;
-    });
-    return total ;
-  }
+   
  /**
    *  Total value calculation  ends
    *

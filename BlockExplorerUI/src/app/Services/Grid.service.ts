@@ -147,6 +147,14 @@ export class GridService {
     const prm: any = new HttpParams().set('URL', '/api/BlockExplorer/GetLastNBlockInfo').set('numberOfBlocks', params);
     return this.http.get<any>(this.baseApiUrl + '/GetAPIResponse', {params: prm});
   }
+
+   //   Get single block info
+   getBlockInfo(height): Observable<any> {
+    const prm: any = new HttpParams().set('URL', '/api/BlockExplorer/GetBlockInfo').set('height', height);
+    return this.http.get<any>(this.baseApiUrl + '/GetAPIResponse', {params: prm});
+  }
+
+
  /** Post Api call starts
   *
   *

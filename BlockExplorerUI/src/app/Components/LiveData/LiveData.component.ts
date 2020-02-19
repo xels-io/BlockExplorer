@@ -58,10 +58,8 @@ export class LiveDataComponent implements OnInit  {
     *
     */
   ngOnInit() {
-    console.log(this.route.queryParams['value'].page)
     this.page.pageNumber = (this.route.queryParams['value'].page)?this.route.queryParams['value'].page:1;
     this.pageCallback({ offset: this.page.pageNumber-1 });
-    //this.getBlockExplorerTableData(this.page.pageNumber);
     interval(150000).subscribe(() => {
       this.getRestBlockData(this.lastHeight);
       }
@@ -137,10 +135,9 @@ export class LiveDataComponent implements OnInit  {
    *
    *
    */
-  blockHeightDetails(searchTerm: any) {
-    console.log(searchTerm);
-    this.gridService.blockData = searchTerm;
-    this.router.navigate(['/blocks', searchTerm.height]);
+  blockHeightDetails(height) {
+    //this.gridService.blockData = height;
+    this.router.navigate(['/blocks', height]);
     }
    /**
    * show details of block data table ends

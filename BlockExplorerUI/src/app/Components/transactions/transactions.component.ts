@@ -20,6 +20,7 @@ export class TransactionsComponent implements OnInit {
   transaction: any = [];
   transactionRows: any = [];
   dataFound = false;
+  dataProcess = true;
   searchPage: any = {
   size:  0,
   pageNumber:  0,
@@ -63,6 +64,7 @@ export class TransactionsComponent implements OnInit {
   */
   loadTransactionData (page) {
     this.transaction = this.Service.getTransactions(page,this.searchValue).subscribe((response: any) => {
+      this.dataProcess = false;
       if (response.transactions.length > 0 ) {
         this.page.totalElements = response.transactionLength;
         this.dataFound = true;

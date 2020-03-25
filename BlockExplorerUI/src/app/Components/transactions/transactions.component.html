@@ -27,7 +27,11 @@
             </div>
             <div class="col-12">
                 <div class="theme-table mb-4">
-                    <ngx-datatable *ngIf="dataFound"
+                    <div class="d-flex justify-content-center" *ngIf="dataProcess">
+                        <div class="spinner-border text-white" style="width: 10rem; height: 10rem;" role="status"></div>
+                    </div>
+                    <div  *ngIf="dataProcess==false">
+                        <ngx-datatable *ngIf="dataFound==true"
                         #table
                         class='material'
                         [columnMode]="'force'"
@@ -63,14 +67,12 @@
 
                     <ngx-datatable *ngIf="dataFound==false" class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'">
                         <ngx-datatable-column name="Block Id"></ngx-datatable-column>
-                        <ngx-datatable-column name="Height">
-                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Height"></ngx-datatable-column>
                         <ngx-datatable-column name="Block Time"></ngx-datatable-column>
                         <ngx-datatable-column name="BlockReward"></ngx-datatable-column>
                         <ngx-datatable-column name="Total Amount"></ngx-datatable-column>
                     </ngx-datatable>
-
-
+                    </div>
                 </div>
             </div>
         </div>

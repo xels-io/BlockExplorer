@@ -21,6 +21,7 @@ export class LiveDataComponent implements OnInit  {
     searchFound = false;
     notFound = false;
     dataFound = false;
+    dataProcess = true;
     socketData: any;
     lastHeight: any ;
     searchVal: any = [] ;
@@ -77,6 +78,7 @@ export class LiveDataComponent implements OnInit  {
   getRestBlockData(height) {
     if (height !== undefined) {
       this.restBlocks = this.gridService.getRestNBlocks(height).subscribe((restResponse: any) => {
+        this.dataProcess = false;
         if (restResponse.InnerMsg.length > 0) {
           this.lastHeight = restResponse.InnerMsg[0].height;
           const m: any[] = this.gridService.getMappedData(restResponse.InnerMsg);
@@ -98,6 +100,7 @@ export class LiveDataComponent implements OnInit  {
   getBlockExplorerTableData(page) {
     this.subs = this.gridService.getAllPagesBlocks(page).subscribe((response: any) => {
    // console.log(response.blocksArray[0].height);
+      this.dataProcess = false;
       if (response.blocksArray.length > 0) {
         this.page.totalElements = response.totalLength;
         this.dataFound = true;
@@ -179,7 +182,7 @@ export class LiveDataComponent implements OnInit  {
     const type = 'Blocks';
     const val: any  = serVal.toString().toLowerCase();
     this.searchVal = this.gridService.searchRows(serVal, type).subscribe((response: any) => {
-      //console.log(response);
+      this.dataProcess = false;
       if (response.statusCode === 200 ) {
           this.notFound = false;
           this.dataFound = false;

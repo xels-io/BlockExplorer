@@ -20,7 +20,11 @@
             </div>
             <div class="col-12">
                 <div class="theme-table mb-4">
-                    <ngx-datatable *ngIf="dataFound" #table class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="10" [count]="page.totalElements" [rows]='rows' [offset]="page.offset" [selectionType]="'multi'"
+                    <div class="d-flex justify-content-center" *ngIf="dataProcess">
+                        <div class="spinner-border text-white" style="width: 10rem; height: 10rem;" role="status"></div>
+                    </div>
+                    <div *ngIf="!dataProcess">
+                        <ngx-datatable *ngIf="dataFound" #table class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="10" [count]="page.totalElements" [rows]='rows' [offset]="page.offset" [selectionType]="'multi'"
                         (page)="pageCallback($event)">
                         <ngx-datatable-column name="Block Id" [sortable]="true"></ngx-datatable-column>
                         <ngx-datatable-column name="Height" [sortable]="true">
@@ -59,6 +63,7 @@
                         <ngx-datatable-column name="BlockReward" [sortable]="true"></ngx-datatable-column>
                         <ngx-datatable-column name="Total Amount" [sortable]="true"></ngx-datatable-column>
                     </ngx-datatable>
+                    </div>
                 </div>
             </div>
         </div>

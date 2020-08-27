@@ -25,11 +25,13 @@ export class GridService {
   public consensus: any = {
     premineHeight: 10,
     premineReward: 187155000,
-    proofOfStakeReward: 375,
-    firstMiningPeriodHeight: 850000,
-    secondMiningPeriodHeight: 850000 + 500000,
-    thirdMiningPeriodHeight: 850000 + 500000 + 850000,
-    forthMiningPeriodHeight: 850000 + 500000 + 850000 + 500000
+    proofOfStakeReward: 50,
+    proofOfWorkReward: 50,
+    firstMiningPeriodHeight: 768000,
+    secondMiningPeriodHeight: 768000 + 768000,
+    thirdMiningPeriodHeight: 768000 + 768000 + 768000,
+    forthMiningPeriodHeight: 768000 + 768000 + 768000 + 768000,
+    fifthMiningPeriodHeight: 768000 + 768000 + 768000 + 768000 + 768000
   };
   constructor(private http: HttpClient) {
     this.socket = socketIo(this.baseApiUrl);
@@ -183,29 +185,48 @@ export class GridService {
   *
   */
 
-  public GetProofOfStakeReward( height) {
-   if (height === 0) {
-        this.rewardCal = 0;
-        return this.rewardCal;
-     } else if (height <= this.consensus.premineHeight) {
-        this.rewardCal = 187155000;
-        return this.rewardCal;
-    } else if (height <= this.consensus.firstMiningPeriodHeight) {
-        this.rewardCal = this.consensus.proofOfStakeReward;
-        return this.rewardCal;
-    } else if (height <= this.consensus.secondMiningPeriodHeight) {
-        this.rewardCal = this.consensus.GetProofOfStakeReward - ((37500) * (height - this.consensus.firstMiningPeriodHeight));
-        return this.rewardCal;
-    } else if (height <= this.consensus.ThirdMiningPeriodHeight) {
-        this.rewardCal = this.consensus.ProofOfStakeReward / 2;
-        return this.rewardCal;
-    } else if (height <= this.consensus.firstMiningPeriodHeight) {
-        this.rewardCal = (this.consensus.ProofOfStakeReward / 2) - ((37500) * (height - this.consensus.thirdMiningPeriodHeight));
-        return this.rewardCal;
-    } else {
-        return this.rewardCal;
-    }
-  }
+  // public GetProofOfStakeReward( height) {
+  //  if (height === 0) {
+  //       this.rewardCal = 0;
+  //       return this.rewardCal;
+  //    } else if (height <= this.consensus.premineHeight) {
+  //       //this.rewardCal = 187155000; old
+  //       this.rewardCal = this.consensus.premineHeight;
+  //       return this.rewardCal;
+  //   } else if (height <= this.consensus.firstMiningPeriodHeight) {
+  //       this.rewardCal = this.consensus.proofOfStakeReward;
+  //       return this.rewardCal;
+  //   } else if (height <= this.consensus.secondMiningPeriodHeight) {
+  //       this.rewardCal = this.consensus.GetProofOfStakeReward - ((3256) * (height - this.consensus.firstMiningPeriodHeight));
+  //       return this.rewardCal;
+  //   } else if (height <= this.consensus.ThirdMiningPeriodHeight) {
+  //       this.rewardCal = this.consensus.ProofOfStakeReward / 2;
+  //       return this.rewardCal;
+  //   } else if (height <= this.consensus.ForthMiningPeriodHeight){
+  //       return (this.consensus.ProofOfStakeReward / 2) - ((1628) * (height - this.consensus.ThirdMiningPeriodHeight));
+  //   }
+  //    else if (height <= this.consensus.firstMiningPeriodHeight) {
+  //       this.rewardCal = (this.consensus.ProofOfStakeReward / 4)
+  //       return this.rewardCal;
+  //   } else {
+  //       let multiplier = (height-this.consensus.FifthMiningPeriodHeight)/210240;
+  //       let returnAmount = 1449770000;
+  //       if (multiplier == 0)
+  //       {
+  //           return 1449770000;
+  //       }
+  //       else
+  //       {
+  //           for (let i = 0; i < multiplier; i++)
+  //           {
+  //               returnAmount *= 1.02;
+  //           }
+  //       }
+  //       this.rewardCal = returnAmount;
+
+  //       return this.rewardCal;
+  //   }
+  // }
   getTransVal(transactions) {
     if (transactions.length > 0 ) {
       transactions[0].vOut[0].value = this.rewardCal * 100000000;
@@ -219,28 +240,29 @@ export class GridService {
   *
   */
   getMappedData(blockRowDataAll) {
-    this.GetProofOfStakeReward(blockRowDataAll[0].height);
+    //this.GetProofOfStakeReward(blockRowDataAll[0].height);
     this.mapData = blockRowDataAll.map((tmp) => {
     if (tmp.transactions.length > 1) {
+      this.rewardCal = (tmp.blockReward / 100000000 );
       //  tmp.transactions.splice(1, 1);
       // totalA = this.getAmount(tmp.transactions) ;
      return {
        blockId: tmp.blockId,
       // blockReward: tmp.blockReward / 100000000,
        blockTime: this.timeFormat(tmp.blockTime),
-       blockReward: this.GetProofOfStakeReward(tmp.height),
+       blockReward: (tmp.blockReward / 100000000 ),
        height: tmp.height,
 
        confirmations: tmp.confirmations,
        transactionCount: tmp.transactionCount,
        transactions: this.getTransVal(tmp.transactions),
-       totalAmount: this.getAmount(tmp.transactions) / 100000000,
+       totalAmount: (tmp.totalAmount / 100000000 ),
      };
      } else {
 
        return {
          blockId: tmp.blockId,
-         blockReward: this.GetProofOfStakeReward(tmp.height),
+         blockReward: (tmp.blockReward / 100000000 ),
          blockTime: this.timeFormat(tmp.blockTime),
          height: tmp.height,
          totalAmount: (tmp.totalAmount / 100000000 ),
@@ -257,28 +279,27 @@ export class GridService {
   *
   */
 
-  /** TotalAmount data calculation starts
-  *
-  *
+  /** 
+   * TotalAmount data calculation starts from transaction amount
   */
- getAmount(transaction) {
-  const y: any [] = this.getTransVal(transaction);
-  let total = 0;
-  if (y.length > 1) {
-    y.splice(1, 1);
-  }
-  y.map((tmpTotal) => {
-    if (tmpTotal.vOut.length > 1 ) {
-      tmpTotal.vOut.shift();
-    }
-    tmpTotal.vOut.map((val) => {
-      if (!val.cStake) {
-        total = total + val.value;
-      }
-    });
-  });
-    return total;
-  }
+//  getAmount(transaction) {
+//   const y: any [] = this.getTransVal(transaction);
+//   let total = 0;
+//   if (y.length > 1) {
+//     y.splice(1, 1);
+//   }
+//   y.map((tmpTotal) => {
+//     if (tmpTotal.vOut.length > 1 ) {
+//       tmpTotal.vOut.shift();
+//     }
+//     tmpTotal.vOut.map((val) => {
+//       if (!val.cStake) {
+//         total = total + val.value;
+//       }
+//     });
+//   });
+//     return total;
+//   }
  /** TotalAmount data calculation ends
   *
   *

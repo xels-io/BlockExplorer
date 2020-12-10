@@ -8,9 +8,6 @@
                     </div>
                     <div class="row block-details">
                         <div class="col-12">
-                            <div class="card-title color-black">
-                                ID
-                            </div>
                             <div class=" item mx-0 mb-3">
                                 <div class="">{{transDetail.txId}}</div>
                             </div>
@@ -21,7 +18,7 @@
                             </div>
                             <div class=" item mx-0 mb-3">
                                 <div class="" *ngFor="let out of transDetail.vOut;let i=index">
-                                    {{(out.scriptPubKey.addresses)?out.scriptPubKey.addresses[0]:''}} {{out.value}}
+                                    {{(out.scriptPubKey.addresses)?out.scriptPubKey.addresses[0]:'N/A'}} {{(out.value)?out.value:''}}
                             </div>
                         </div>
                         <div class="card-title color-black">
@@ -53,7 +50,7 @@
                         </div>
                         <div class="row item mx-0 mb-3">
                             <div class="col-md-3 p-0">Reward From Block</div>
-                            <div class="col-md-9 p-0 text-right"><a href="/blocks/{{blockDetails.height}}">{{blockDetails.height}}</a></div>
+                            <div class="col-md-9 p-0 text-right"><a href="/blocks/{{blockDetails.blockId}}">{{blockDetails.height}}</a></div>
                         </div>
                         <div class="row item mx-0 mb-3">
                             <div class="col-md-3 p-0">BlockReward</div>

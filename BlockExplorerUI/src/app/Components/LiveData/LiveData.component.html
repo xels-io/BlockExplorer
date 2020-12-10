@@ -30,7 +30,7 @@
 
                         <ngx-datatable-column name="Block Id" [sortable]="true">
                             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                <a (click)=blockDetails(row.blockId)> {{row.blockId}}</a>
+                                <a (click)=blockDetails(row.blockId) title="{{row.blockId}}"> {{row.blockId}}</a>
                             </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Height" [sortable]="true"></ngx-datatable-column>

@@ -84,24 +84,30 @@ export class TransactionsComponent implements OnInit {
   *
   */
    transactionData(transactionArray) {
+     console.log('transactionArray',transactionArray);
     this.rowTrans = transactionArray.map((tmp) => {
-      console.log(tmp)
+      let totalOut = 0;
+      tmp.vout.map((val) => {
+        totalOut = totalOut + val.value;
+      });
+      let inputs,outputs;
+      for(let o in tmp.vout){
+        let out = tmp.vout[o];
+        outputs = ((out.scriptPubKey.addresses)?out.scriptPubKey.addresses[0]:'N/A')+' '+((out.value)?out.value:'');
+      }
+
+      for(let i in tmp.vin){
+        let vin = tmp.vin[i];
+        inputs = ((vin.scriptPubKey)?vin.scriptPubKey.addresses[0]:'N/A')+' '+((vin.value)?vin.value:'');
+      }
       return {
-        inputs: tmp.inputs,
-        lockTime: this.Service.timeFormat(tmp.lockTime),
-        outputs: tmp.outputs.slice(0, tmp.outputs.indexOf(' ')),
+        inputs: inputs,
+        outputs: outputs,
         time: this.Service.timeFormat(tmp.time),
-        totalOut: (tmp.totalOut / 100000000),
-        transactionId: tmp.txId,
-        vIn: tmp.vIn,
-        vOut: tmp.vOut.length ? (tmp.vOut.map((vout) => {
-          return{
-            address : vout.address,
-            scriptPubKey : vout.scriptPubKey,
-            value : (vout.value / 100000000)
-          };
-        })) : tmp.vOut,
-        version: tmp.version
+        totalOut: totalOut,
+        transactionId: tmp.txid,
+        vIn: tmp.vin,
+        vOut: tmp.vout,
       };
     });
     if(this.rowTrans.length>0){

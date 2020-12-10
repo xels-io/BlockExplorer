@@ -8,10 +8,10 @@
                 <div class="row block-details"></div>
                     <div class="col-12">
                         <div class="card-title color-black">
-                            ID
+                            Transaction Id
                         </div>
-                        <div class=" item mx-0 mb-3">
-                            <div class="">{{transDetail.txId}}</div>
+                        <div class=" item mb-3 p-2">
+                            {{transDetail.transactionId}}
                         </div>
 
                         <div class=" item mx-0 mb-3">
@@ -24,8 +24,8 @@
                                 </thead>
                                 <tbody>
                                   <tr *ngFor="let v of transDetail.vOut">
-                                    <td> {{v.address}}  </td>
-                                    <td> {{v.value }}  </td>
+                                    <td> {{((v.scriptPubKey.addresses)?v.scriptPubKey.addresses[0]:'N/A')}}  </td>
+                                    <td> {{ (v.value)?v.value:'N/A' }}  </td>
                                   </tr>
                                 </tbody>
                                 <tfoot>

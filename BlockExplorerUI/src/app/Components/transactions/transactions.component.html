@@ -48,11 +48,11 @@
                         [messages]="'No data found!'"
                         (page)="transactionPage($event)"
                         >
-                        <ngx-datatable-column name="Transaction Id" >
+                        <ngx-datatable-column name="Transaction Id" title="{{txid}}">
                             <!-- <a (click)= openDialog(rowTrans)> {{rowTrans.txId}}</a> -->
                           <!-- <a (click)="openDialog(rowTrans)" class="ng-binding color-link" style="color:#10ADE4;cursor: pointer;">{{rowTrans.txId}}</a> -->
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Inputs" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Inputs" title=""></ngx-datatable-column>
                         <ngx-datatable-column name="Outputs" > {{rowTrans.outputs}}</ngx-datatable-column>
                         <ngx-datatable-column name="Time" ></ngx-datatable-column>
                         <ngx-datatable-column name="Details" >

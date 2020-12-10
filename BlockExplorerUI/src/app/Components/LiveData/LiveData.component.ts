@@ -189,7 +189,7 @@ export class LiveDataComponent implements OnInit  {
           this.notFound = false;
           this.dataFound = false;
           this.searchFound = true;
-          this.rows = response.InnerMsg;
+          this.rows = this.gridService.getMappedData(response.InnerMsg)
          // this.searchPage.totalElements = response.InnerMsg.length;
         } else {
           this.notFound = true;

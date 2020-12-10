@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="ellipsis">
                                                 <span *ngIf="output.scriptPubKey.addresses" class="ng-binding ng-hide">
-                                                    {{(output.scriptPubKey.addresses)?output.scriptPubKey.addresses[0]:''}}
+                                                    {{(output.scriptPubKey.addresses)?output.scriptPubKey.addresses[0]:'N/A'}}
                                                     <!-- <a href="transaction/{{output.address}}"  class="ng-binding">
                                                         {{output.address}}
                                                     </a> -->

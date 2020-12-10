@@ -287,13 +287,12 @@ export class GridService {
    * TotalAmount data calculation starts from transaction amount
   */
  getAmount(transactions) {
+  
   // const y: any [] = this.getTransVal(transaction);
   let y = transactions.slice();
   let total = 0;
+  
   y.map((tmpTotal) => {
-    if (tmpTotal.vout.length > 1 ) {
-      tmpTotal.vout.shift();
-    }
     tmpTotal.vout.map((val) => {
       total = total + val.value;
     });

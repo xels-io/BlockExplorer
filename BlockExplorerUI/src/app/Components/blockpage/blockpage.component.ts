@@ -21,7 +21,6 @@ export class BlockpageComponent implements OnInit {
 
   }
   ngOnInit() {
-    
   }
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {

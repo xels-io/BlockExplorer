@@ -19,8 +19,6 @@ import { BlockDetailsComponent } from './Components/block-details/block-details.
     { path: 'contact', component: ContactComponent },
     { path: 'transaction/:address', component: TransactionDetailComponent },
     { path: 'transaction/:txId', component: AddressAmountComponent },
-    { path: 'blocks/:height', component: BlockDetailsComponent }
-    // { path: 'blocks/:height', loadChildren: './Components/block-details/block-detail/block-detail.module#BlockDetailModule'  },
 
   ];
   export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);

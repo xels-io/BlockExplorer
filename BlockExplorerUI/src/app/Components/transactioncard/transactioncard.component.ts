@@ -15,28 +15,34 @@ import { TransactionDetailComponent } from '../transaction-detail/transaction-de
 
 export class TransactioncardComponent implements OnInit {
 
-  @Input() blockData;
-  @Input() cardData;
+  cardData:Array<any> = [];
+  blockData:Array<any> = [];
+  @Input('blockid') blockid:String;
   InO: any ;
-  dataIn: any;
+  //dataIn: any;
   inputVal = false;
   outputVal = false;
-  height: any;
+  toggle = [];
   public buttonName: any = 'fa fa-plus';
 
   constructor(private service: GridService,  private router: Router, public dialog: MatDialog) {
-
    }
+   
    /** initialization starts
   *
   *
   */
- ngOnInit() {
+  ngOnInit() {
+    this.service.getBlockInfo(this.blockid).subscribe(resp=>{
+      this.blockData = this.service.getMappedData([resp.InnerMsg])[0];
+      this.cardData = this.service.getTransactionDataMapped(this.blockData['transactions']);
+      console.log(this.cardData);
+    })
+
 
     if (this.blockData !== undefined) {
-      this.height = this.blockData.height;
-      this.dataIn = this.blockData;
-      
+      //this.height = this.blockData.height;
+      //this.dataIn = this.blockData;
     }
   }
   /** initialization ends
@@ -83,9 +89,6 @@ export class TransactioncardComponent implements OnInit {
   //   this.service.transaction = Object.assign(item);
   //   this.router.navigate(['/transaction',   {transaction: item}]);
   // }
-
-  toggle(i) {
-  }
 
 
 }

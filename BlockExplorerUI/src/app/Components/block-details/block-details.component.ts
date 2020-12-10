@@ -11,41 +11,20 @@ import { EventEmitter } from 'protractor';
 export class BlockDetailsComponent implements OnInit, OnDestroy  {
 
   height: any;
+  blockid: any;
   blockData: any;
-  transactionData: any;
   constructor(public gridService: GridService,private route:ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    this.height = this.route.params['value'].height;
-    this.gridService.getBlockInfo(this.height).subscribe(resp=>{
-      this.blockData = resp.InnerMsg;
-
-      this.transactionData = this.blockData['transactions'].map( (Retval) => {
-        return {
-          inputs: Retval.inputs,
-          lockTime: this.gridService.timeFormat(Retval.lockTime) ,
-          outputs: Retval.outputs,
-          time: this.gridService.timeFormat(Retval.time), //1548407440,
-          totalOut : Retval.totalOut,
-          totalVOut:  this.toatalValCal(Retval.vOut),
-          txId: Retval.txId,
-          vIn: Retval.vIn,
-          vOut: Retval.vOut
-        };
-      });
-
-      console.log('From BlockDetailsComponent',resp.InnerMsg);
+    this.blockid = this.route.params['value'].blockid;
+    this.gridService.getBlockInfo(this.blockid).subscribe(resp=>{
+      let blockData = this.gridService.getMappedData([resp.InnerMsg]);
+      this.blockData = blockData[0];
     })
   }
-  toatalValCal(voutVal) {
-    let total = 0 ;
-    voutVal.map( (val) => {
-      total = (total + val.value) / 100000000;
-    });
-    return total ;
-  }
+  
   getVal(val) {
   }
   ngOnDestroy() {

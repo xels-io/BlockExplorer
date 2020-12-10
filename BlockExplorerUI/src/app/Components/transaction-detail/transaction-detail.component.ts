@@ -17,13 +17,14 @@ export class TransactionDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.blockDetails = this.service.blockData;
+    this.blockDetails = (Array.isArray(this.service.blockData))?this.service.blockData[0]:this.service.blockData;
 
     this.transDetail = this.data.data;
     if (this.service.transaction !== undefined) {
        this.transDetail =  this.service.transaction;
-      // console.log(this.transDetail);
     }
+    console.log(this.blockDetails);
+    console.log(this.transDetail);
   }
 
 }

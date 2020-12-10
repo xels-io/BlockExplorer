@@ -32,7 +32,7 @@ export class LiveDataComponent implements OnInit  {
       { name: 'Transaction Count' },
       { name: 'Total Amount' },
       { name: 'Confirmations' },
-      { name: 'BlockReward' }
+      { name: 'Block Reward' }
     ];
     data = 'GetLastNBlockInfo';
     page: any = {
@@ -138,9 +138,11 @@ export class LiveDataComponent implements OnInit  {
    *
    *
    */
-  blockHeightDetails(height) {
+
+   //blockId = block Hash
+  blockDetails(blockId) {
     //this.gridService.blockData = height;
-    this.router.navigate(['/blocks', height]);
+    this.router.navigate(['/blocks', blockId]);
     }
    /**
    * show details of block data table ends

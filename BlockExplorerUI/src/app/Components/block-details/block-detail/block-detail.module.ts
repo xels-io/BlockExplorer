@@ -20,7 +20,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 const routes: Routes = [
 
-  { path: 'blocks/:height', component: BlockDetailsComponent },
+  { path: 'blocks/:blockid', component: BlockDetailsComponent },
 
 ];
 @NgModule({

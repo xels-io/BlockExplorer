@@ -19,7 +19,8 @@
                             </div>
                             <div class=" item mx-0 mb-3">
                                 <div class="" *ngFor="let out of transDetail.vOut;let i=index">
-                                     {{out.address}}{{out.value / 100000000}}
+                                    {{(out.scriptPubKey.addresses)?out.scriptPubKey.addresses[0]:''}} {{out.value}}
+                                     <!-- {{out.address}}{{out.value / 100000000}} -->
                             </div>
                         </div>
                         <div class="card-title color-black">
@@ -38,12 +39,8 @@
                             <div class="col-md-9 p-0 text-right">{{transDetail.time}}</div>
                         </div>
                         <div class="row item mx-0 mb-3">
-                            <div class="col-md-3 p-0">Lock Time</div>
-                            <div class="col-md-9 p-0 text-right">{{transDetail.lockTime}}</div>
-                        </div>
-                        <div class="row item mx-0 mb-3">
                             <div class="col-md-3 p-0">Total Out</div>
-                            <div class="col-md-9 p-0 text-right">{{transDetail.totalOut / 100000000}}</div>
+                            <div class="col-md-9 p-0 text-right">{{transDetail.totalVOut}}</div>
                         </div>
                         <div class="row item mx-0 mb-3">
                             <div class="col-md-3 p-0">Reward From Block</div>

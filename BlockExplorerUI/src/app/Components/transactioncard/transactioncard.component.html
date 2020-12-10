@@ -2,8 +2,8 @@
     <div class="container">
         <div class="theme-card card">
             <div class="card-body">
-                <div id="TransactionsDiv" *ngIf="cardData.length">
-                    <h4>Transactions</h4>
+                <div id="TransactionsDiv" *ngIf="cardData && cardData.length">
+                    <h4>Transactions ({{cardData.length}})</h4>
                     <div class="example-card" dynamicHeight="true" *ngFor="let item of cardData;let i=index">
                          <div id="transcationId" class="mb-3">
                             <div class="row">
@@ -20,7 +20,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-lg-6">
-                                <div *ngIf="item.vIn || item.vOut">
+                                <div *ngIf="item.vIn">
                                     <div *ngIf="item.vIn">
                                         <div class="" *ngFor="let input of item.vIn" >
                                              <div class="transaction-vin-vout panel panel-default mb-2">
@@ -41,7 +41,7 @@
                                                     <strong>Confirmations: </strong>
                                                 </div>
                                                 <div>
-                                                    <strong>ScriptSig : </strong><span class="text-muted">{{(input.scriptSig.length < 10)?input.scriptSig: input.scriptSig.substring(0,50)}}</span>
+                                                    <strong>ScriptSig : </strong><span class="text-muted" *ngIf="input && input.scriptSig && input.scriptSig.hex">{{(input.scriptSig.hex.length < 10)?input.hex.scriptSig: input.scriptSig.hex.substring(0,50)}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -54,12 +54,12 @@
                                          <div class="transaction-vin-vout panel panel-default mb-2">
                                             <div class="pull-right btc-value ng-binding" data-ng-class="{'text-danger': $root.currentAddr == vin.addr}" >
                                                 <span >
-                                                    {{output.value / 100000000}} Xels
+                                                    {{output.value}} XELS
                                                 </span>
                                             </div>
                                             <div class="ellipsis">
-                                                <span *ngIf="output.address" class="ng-binding ng-hide">
-                                                    {{output.address}}
+                                                <span *ngIf="output.scriptPubKey.addresses" class="ng-binding ng-hide">
+                                                    {{(output.scriptPubKey.addresses)?output.scriptPubKey.addresses[0]:''}}
                                                     <!-- <a href="transaction/{{output.address}}"  class="ng-binding">
                                                         {{output.address}}
                                                     </a> -->
@@ -71,9 +71,8 @@
                                                 <strong> Type: </strong><br>
                                             </div>
                                             <div>
-                                                <strong> ScriptPubKey: </strong> {{output.scriptPubKey}}
-
-                                                <br>
+                                                <strong> ScriptPubKey: </strong>
+                                                <span *ngIf="output.scriptPubKey">{{output.scriptPubKey.hex}}</span>
                                             </div>
                                         </div>
                                         <div class="PanelDetailsRight" [hidden]="!this.show">

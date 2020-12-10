@@ -137,7 +137,7 @@ export class GridService {
   */
   getRestNBlocks(params: any): Observable<any> {
     // console.log('param');
-    const prm: any = new HttpParams().set('URL', '/api/BlockExplorer/RestblockAppend').set('height', params);
+    const prm: any = new HttpParams().set('URL', '/api/BlockStore/getallblocksfromheight').set('height', params);
     return this.http.get<any>(this.baseApiUrl + '/RestBlock', {params: prm});
   }
   /** Get rest new blocks ends
@@ -151,8 +151,9 @@ export class GridService {
   }
 
    //   Get single block info
-   getBlockInfo(height): Observable<any> {
-    const prm: any = new HttpParams().set('URL', '/api/BlockExplorer/GetBlockInfo').set('height', height);
+   // blockid = block hash
+   getBlockInfo(blockid): Observable<any> {
+    const prm: any = new HttpParams().set('URL', '/api/BlockStore/block').set('Hash', blockid).set('showTransactionDetails','true').set('OutputJson','true');
     return this.http.get<any>(this.baseApiUrl + '/GetAPIResponse', {params: prm});
   }
 
@@ -241,38 +242,41 @@ export class GridService {
   */
   getMappedData(blockRowDataAll) {
     //this.GetProofOfStakeReward(blockRowDataAll[0].height);
-    this.mapData = blockRowDataAll.map((tmp) => {
-    if (tmp.transactions.length > 1) {
-      this.rewardCal = (tmp.blockReward / 100000000 );
-      //  tmp.transactions.splice(1, 1);
-      // totalA = this.getAmount(tmp.transactions) ;
-     return {
-       blockId: tmp.blockId,
-      // blockReward: tmp.blockReward / 100000000,
-       blockTime: this.timeFormat(tmp.blockTime),
-       blockReward: (tmp.blockReward / 100000000 ),
-       height: tmp.height,
+      let blockData = blockRowDataAll.map((tmp) => {
+        let totalA = this.getAmount(tmp.transactions) ;
+      if (tmp.transactions.length > 1) {
+        this.rewardCal = (tmp.blockReward / 100000000 );
+        //  tmp.transactions.splice(1, 1);
+        return {
+          blockId: tmp.hash,
+          transactions: tmp.transactions,
+          tx: tmp.tx,
+          blockTime: this.timeFormat(tmp.time),
+          blockReward: (tmp.blockreward / 100000000 ),
+          height: tmp.height,
 
-       confirmations: tmp.confirmations,
-       transactionCount: tmp.transactionCount,
-       transactions: this.getTransVal(tmp.transactions),
-       totalAmount: (tmp.totalAmount / 100000000 ),
-     };
-     } else {
-
-       return {
-         blockId: tmp.blockId,
-         blockReward: (tmp.blockReward / 100000000 ),
-         blockTime: this.timeFormat(tmp.blockTime),
-         height: tmp.height,
-         totalAmount: (tmp.totalAmount / 100000000 ),
-         confirmations: tmp.confirmations,
-         transactionCount: tmp.transactionCount,
-         transactions: this.getTransVal(tmp.transactions)
-       };
-     }
- });
-   return this.mapData;
+          confirmations: tmp.confirmations,
+          transactionCount: tmp.nTx,
+          //  transactions: this.getTransVal(tmp.transactions),
+          
+          totalAmount: totalA,
+        };
+      } else {
+        return {
+          blockId: tmp.hash,
+          blockReward: (tmp.blockreward / 100000000 ),
+          blockTime: this.timeFormat(tmp.time),
+          height: tmp.height,
+          totalAmount: totalA,
+          confirmations: tmp.confirmations,
+          transactionCount: tmp.nTx,
+          transactions: tmp.transactions
+          //  transactions: this.getTransVal(tmp.transactions)
+        };
+      }
+    });
+    this.blockData = blockData;
+    return blockData;
  }
   /** mapping block data table ends
   *
@@ -282,27 +286,52 @@ export class GridService {
   /** 
    * TotalAmount data calculation starts from transaction amount
   */
-//  getAmount(transaction) {
-//   const y: any [] = this.getTransVal(transaction);
-//   let total = 0;
-//   if (y.length > 1) {
-//     y.splice(1, 1);
-//   }
-//   y.map((tmpTotal) => {
-//     if (tmpTotal.vOut.length > 1 ) {
-//       tmpTotal.vOut.shift();
-//     }
-//     tmpTotal.vOut.map((val) => {
-//       if (!val.cStake) {
-//         total = total + val.value;
-//       }
-//     });
-//   });
-//     return total;
-//   }
+ getAmount(transactions) {
+  // const y: any [] = this.getTransVal(transaction);
+  let y = transactions.slice();
+  let total = 0;
+  y.map((tmpTotal) => {
+    if (tmpTotal.vout.length > 1 ) {
+      tmpTotal.vout.shift();
+    }
+    tmpTotal.vout.map((val) => {
+      total = total + val.value;
+    });
+  });
+  return total;
+  }
  /** TotalAmount data calculation ends
   *
   *
   */
+
+
+ toatalValCal(voutVal) {
+    let total = 0 ;
+    voutVal.map( (val) => {
+      //total = (total + val.value) / 100000000;
+      total = (total + val.value);
+    });
+    return total ;
+  }
+
+  getTransactionDataMapped(transactions){
+    let mapped =  transactions.map( (Retval) => {
+      return {
+        inputs: Retval.inputs,
+        lockTime: this.timeFormat(Retval.lockTime) ,
+        outputs: Retval.outputs,
+        time: this.timeFormat(Retval.time), //1548407440,
+        totalVOut:  this.toatalValCal(Retval.vout),
+        txId: Retval.txid,
+        vIn: Retval.vin,
+        vOut: Retval.vout
+      };
+    });
+
+    return mapped;
+
+    
+  }
 
 }

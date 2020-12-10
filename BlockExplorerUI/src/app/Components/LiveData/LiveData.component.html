@@ -26,14 +26,17 @@
                     <div *ngIf="!dataProcess">
                         <ngx-datatable *ngIf="dataFound" #table class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="10" [count]="page.totalElements" [rows]='rows' [offset]="page.offset" [selectionType]="'multi'"
                         (page)="pageCallback($event)">
-                        <ngx-datatable-column name="Block Id" [sortable]="true"></ngx-datatable-column>
-                        <ngx-datatable-column name="Height" [sortable]="true">
+                        
+
+                        <ngx-datatable-column name="Block Id" [sortable]="true">
                             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                <a (click)=blockHeightDetails(row.height)> {{row.height}}</a>
+                                <a (click)=blockDetails(row.blockId)> {{row.blockId}}</a>
                             </ng-template>
                         </ngx-datatable-column>
+                        <ngx-datatable-column name="Height" [sortable]="true"></ngx-datatable-column>
+
                         <ngx-datatable-column name="Block Time" [sortable]="true"></ngx-datatable-column>
-                        <ngx-datatable-column name="BlockReward" [sortable]="true"></ngx-datatable-column>
+                        <ngx-datatable-column name="Block Reward" [sortable]="true"></ngx-datatable-column>
                         <ngx-datatable-column name="Total Amount" [sortable]="true"></ngx-datatable-column>
 
                         <!-- Column Templates -->

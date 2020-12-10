@@ -23,8 +23,6 @@ export class TransactionDetailComponent implements OnInit {
     if (this.service.transaction !== undefined) {
        this.transDetail =  this.service.transaction;
     }
-    console.log(this.blockDetails);
-    console.log(this.transDetail);
   }
 
 }

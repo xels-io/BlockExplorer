@@ -36,7 +36,6 @@ export class TransactioncardComponent implements OnInit {
     this.service.getBlockInfo(this.blockid).subscribe(resp=>{
       this.blockData = this.service.getMappedData([resp.InnerMsg])[0];
       this.cardData = this.service.getTransactionDataMapped(this.blockData['transactions']);
-      console.log(this.cardData);
     })
 
 

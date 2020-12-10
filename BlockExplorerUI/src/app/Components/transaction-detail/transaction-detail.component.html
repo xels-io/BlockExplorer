@@ -15,12 +15,13 @@
                                 <div class="">{{transDetail.txId}}</div>
                             </div>
                             <div class=" item mx-0 mb-3">
-                                <div class="" *ngFor="let in of transDetail.vIn; let i=index">{{in.address}}</div>
+                                <div class="" *ngFor="let in of transDetail.vIn; let i=index">
+                                    {{(in.scriptPubKey)?in.scriptPubKey.addresses[0]:'Coinbase'}} {{(in.value)?in.value:''}}
+                                </div>
                             </div>
                             <div class=" item mx-0 mb-3">
                                 <div class="" *ngFor="let out of transDetail.vOut;let i=index">
                                     {{(out.scriptPubKey.addresses)?out.scriptPubKey.addresses[0]:''}} {{out.value}}
-                                     <!-- {{out.address}}{{out.value / 100000000}} -->
                             </div>
                         </div>
                         <div class="card-title color-black">
@@ -28,11 +29,19 @@
                         </div>
                         <div class="row item mx-0 mb-3">
                             <div class="col-md-3 p-0">Inputs</div>
-                            <div class="col-md-9 p-0 text-right">{{transDetail.inputs}}</div>
+                            <div class="col-md-9 p-0 text-right">
+                                <div class="" *ngFor="let in of transDetail.vIn; let i=index">
+                                    {{(in.scriptPubKey)?in.scriptPubKey.addresses[0]:'N/A'}} {{(in.value)?in.value:''}}
+                                </div>
+                            </div>
                         </div>
                         <div class="row item mx-0 mb-3">
                             <div class="col-md-3 p-0">Outputs</div>
-                            <div class="col-md-9 p-0 text-right">{{transDetail.outputs}}</div>
+                            <div class="col-md-9 p-0 text-right">
+                                <div *ngFor="let out of transDetail.vOut;let i=index">
+                                    {{(out.scriptPubKey.addresses)?out.scriptPubKey.addresses[0]:''}} {{out.value}}
+                                </div>
+                            </div>
                         </div>
                         <div class="row item mx-0 mb-3">
                             <div class="col-md-3 p-0">Received Time</div>

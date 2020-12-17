@@ -1,0 +1,35 @@
+.mat-dialog-container {
+    border-radius: 25px !important;
+}
+.block-details .item {
+    border-radius: 6px;
+    border: 1px solid #53B848;
+    padding: 8px 12px;
+}
+
+.example-card.mat-card {
+    box-shadow: none;
+}
+.example-card
+{
+  margin-bottom: 5%;
+}
+.mat-card-header {
+    width: 100%;
+    display: block;
+}
+
+.panel {
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  margin: 4px;
+  min-height: 45px;
+  padding: 0.8em;
+  color: #53b848;
+}
+.ellipsis {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

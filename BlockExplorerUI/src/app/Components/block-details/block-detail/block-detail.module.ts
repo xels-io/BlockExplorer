@@ -18,6 +18,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
+import { RawComponent } from '../../raw/raw.component';
 const routes: Routes = [
 
   { path: 'blocks/:blockid', component: BlockDetailsComponent },
@@ -37,7 +38,7 @@ const routes: Routes = [
     MatDialogModule
   ],
 
-  declarations: [BlockDetailsComponent,  BlockpageComponent, TransactioncardComponent, TransactionDetailComponent],
+  declarations: [BlockDetailsComponent,  BlockpageComponent, TransactioncardComponent, TransactionDetailComponent,RawComponent],
   exports: [ BlockDetailsComponent, BlockpageComponent, TransactioncardComponent,TransactionDetailComponent, RouterModule],
  // providers: [GridService]
 })

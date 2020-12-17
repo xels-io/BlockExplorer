@@ -1,0 +1,22 @@
+<mat-dialog-content class="mat-typography">
+  <section class="">
+      <div class="container">
+          <div class="theme-card card">
+              <div class="card-body">
+                <div class="card-title color-black">
+                    <h2>Raw Transaction</h2>
+                </div>
+                <div class="">
+                  <pre>{{ raw | json}}</pre>
+                </div>
+              </div>
+          </div>
+         </div>
+  </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success mr-3" mat-button mat-dialog-close>Close</button>
+  <button class="btn btn-success" mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
+
+

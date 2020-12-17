@@ -33,7 +33,6 @@ export class TransactioncardComponent implements OnInit {
   *
   */
   ngOnInit() {
-    console.log(this.blockid)
     this.service.getBlockInfo(this.blockid).subscribe(resp=>{
       let blockData = this.service.getMappedData([resp.InnerMsg])
       this.blockData = blockData[0];

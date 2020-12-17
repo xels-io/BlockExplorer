@@ -1,5 +1,8 @@
 <div>
        <app-blockpage [tableData]="blockData"></app-blockpage>
+       <div class="container text-center">
+              <button class="btn btn-info" (click)="showRawBlock()">Show Raw</button>
+       </div>
        <app-transactioncard [blockid]="blockid"></app-transactioncard>
 </div>
 

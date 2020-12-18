@@ -49,6 +49,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="text-center">
+                        <button class="btn btn-success m-1" title="Previous Block" (click)="block(tableData.height-1)"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+                        <button class="btn btn-success m-1" title="Next Block" (click)="block(tableData.height+1)"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                        <div class="text-danger" *ngIf="no">No Block Found!</div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -157,6 +157,12 @@ export class GridService {
     return this.http.get<any>(this.baseApiUrl + '/GetAPIResponse', {params: prm});
   }
 
+   //   Get single block info
+   getBlockInfoByHeight(height): Observable<any> {
+    const perpage: any = 10;
+    return this.http.get<any>(this.baseApiUrl + '/getBlockByHeight?height=' + height);
+  }
+
 
  /** Post Api call starts
   *

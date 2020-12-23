@@ -28,7 +28,7 @@ export class LiveDataComponent implements OnInit  {
     public BlockGridColumns = [
       { name: 'Block Id' },
       { name: 'Height' },
-      { name: 'Block Time' },
+      { name: 'Time Ago' },
       { name: 'Transaction Count' },
       { name: 'Total Amount' },
       { name: 'Confirmations' },

@@ -184,9 +184,15 @@ export class GridService {
 
   timeFormat (time) {
     const currentDate = new Date(time * 1000);
-    let dateString = moment.utc(currentDate).format("DD-MM-YYYY HH:mm:ss");
+    let dateString = moment(currentDate).format("DD-MM-YYYY HH:mm:ss");
     return dateString;
   }
+  standardFormat (datetime) {
+    const currentDate = new Date(datetime * 1000);
+    let dateString = moment.utc(currentDate).format("YYYY-MM-DD HH:mm:ss");
+    return dateString;
+  }
+
   /** format time ends
   *
   *
@@ -250,6 +256,10 @@ export class GridService {
     //this.GetProofOfStakeReward(blockRowDataAll[0].height);
       let blockData = blockRowDataAll.map((tmp) => {
         let totalA = this.getAmount(tmp.transactions) ;
+        let blockTime = this.timeFormat(tmp.time);
+        let stFormatTime = this.standardFormat(tmp.time);
+        let timeAgo = moment(stFormatTime+ 'Z').fromNow();
+
       if (tmp.transactions.length > 1) {
         this.rewardCal = (tmp.blockReward / 100000000 );
         //  tmp.transactions.splice(1, 1);
@@ -257,7 +267,8 @@ export class GridService {
           blockId: tmp.hash,
           transactions: tmp.transactions,
           tx: tmp.tx,
-          blockTime: this.timeFormat(tmp.time),
+          blockTime: blockTime,
+          timeAgo:timeAgo,
           blockReward: (tmp.blockreward / 100000000 ),
           height: tmp.height,
 
@@ -272,6 +283,7 @@ export class GridService {
           blockId: tmp.hash,
           blockReward: (tmp.blockreward / 100000000 ),
           blockTime: this.timeFormat(tmp.time),
+          timeAgo:timeAgo,
           height: tmp.height,
           totalAmount: totalA,
           confirmations: tmp.confirmations,

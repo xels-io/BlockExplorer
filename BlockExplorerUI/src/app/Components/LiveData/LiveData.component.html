@@ -35,7 +35,12 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Height" [sortable]="true"></ngx-datatable-column>
 
-                        <ngx-datatable-column name="Block Time" [sortable]="true"></ngx-datatable-column>
+                        <ngx-datatable-column name="Age" [sortable]="true">
+                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                {{row.timeAgo}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                     
                         <ngx-datatable-column name="Block Reward" [sortable]="true"></ngx-datatable-column>
                         <ngx-datatable-column name="Total Amount" [sortable]="true"></ngx-datatable-column>
 

@@ -24,7 +24,6 @@ export class BlockpageComponent implements OnInit {
   ngOnInit() {
   }
   block(height){
-    console.log(height);
     this.gridService.getBlockInfoByHeight(height).subscribe(resp=>{
       let block = resp.InnerMsg;
       if(block.length>0){

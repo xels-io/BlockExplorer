@@ -28,8 +28,8 @@
                                                     1 Xels
                                                 </div>
                                                 <div class="">
-                                                    <span *ngIf="input.address" class="ng-binding ng-hide">
-                                                        {{input.address}}
+                                                    <span class="ng-binding ng-hide">
+                                                        {{(input.scriptPubKey && input.scriptPubKey.addresses)?input.scriptPubKey.addresses[0]:'N/A'}}
                                                         <!-- <a href="transaction/{{input.address}}"  class="ng-binding">
                                                             {{input.address}}
                                                         </a> -->
@@ -83,8 +83,8 @@
                         </div>
                         <!-- <mat-divider></mat-divider> -->
                         <div class="text-right">
-                            <button id="confirm" class="btn btn-info mr-3" mat-button>{{blockData.confirmations}} Confirmations</button>
-                            <button id="coin" class="btn btn-success" mat-button>{{item.totalVOut}} Xels</button>
+                            <span id="confirm" class="highlight-box highlight-box-info mr-3" mat-button>{{blockData.confirmations}} Confirmations</span>
+                            <span id="coin" class="highlight-box highlight-box-success" mat-button>{{item.totalVOut}} Xels</span>
                         </div>
                     </div>
                 </div>

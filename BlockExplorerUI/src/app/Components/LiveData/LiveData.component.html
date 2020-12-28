@@ -10,10 +10,10 @@
         <div class="row">
             <div class="table-search theme-form col-md-3 offset-md-9">
                 <div class="input-group mb-3">
-                    <input type="text" id="searchBox" class="form-control" placeholder="Search" [(ngModel)]="searchText" (keyup.enter)='searchOutput($event.target.value)'>
+                    <input type="text" id="searchBox" class="form-control" placeholder="Search" [(ngModel)]="searchText" (keyup.enter)='searchOutput()'>
                     <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button" (click)="clearSerachVal()">
-                        <i class="fa fa-times-circle"></i>
+                        <button class="btn btn-secondary" type="button" (click)="searchOutput()">
+                        <i class="fa fa-search"></i>
                     </button>
                     </div>
                 </div>
@@ -24,52 +24,77 @@
                         <div class="spinner-border text-white" style="width: 10rem; height: 10rem;" role="status"></div>
                     </div>
                     <div *ngIf="!dataProcess">
-                        <ngx-datatable *ngIf="dataFound" #table class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [limit]="10" [count]="page.totalElements" [rows]='rows' [offset]="page.offset" [selectionType]="'multi'"
+                        <ngx-datatable *ngIf="dataFound" #table class='material' 
+                        
+                        [columnMode]="'force'" 
+                        [headerHeight]="50" 
+                        [footerHeight]="50" 
+                        [rowHeight]="'auto'" 
+                        [externalPaging]="true" 
+                        [limit]="10" 
+                        [count]="page.totalElements" 
+                        [rows]='rows' 
+                        [offset]="page.offset" 
+                        [selectionType]="'multi'"
                         (page)="pageCallback($event)">
                         
 
-                        <ngx-datatable-column name="Block Id" [sortable]="true">
+                        <ngx-datatable-column name="Block Id" [sortable]="true" [width]="380"></ngx-datatable-column>
+
+                        <ngx-datatable-column name="Height" [sortable]="true" [width]="50">
                             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                <a (click)=blockDetails(row.blockId) title="{{row.blockId}}"> {{row.blockId}}</a>
+                                <a (click)=blockDetails(row.blockId) title="{{row.blockId}}"> {{row.height}}</a>
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Height" [sortable]="true"></ngx-datatable-column>
 
-                        <ngx-datatable-column name="Age" [sortable]="true">
+                        <ngx-datatable-column name="Tx Count" [sortable]="true" [width]="20">
+                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                {{row.transactionCount}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Age" [sortable]="true" [width]="100">
                             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                                 {{row.timeAgo}}
                             </ng-template>
                         </ngx-datatable-column>
                      
-                        <ngx-datatable-column name="Block Reward" [sortable]="true"></ngx-datatable-column>
-                        <ngx-datatable-column name="Total Amount" [sortable]="true"></ngx-datatable-column>
+                        <ngx-datatable-column name="Block Reward" [sortable]="true" [width]="40"></ngx-datatable-column>
+                        <ngx-datatable-column name="Total Amount" [sortable]="true" [width]="80"></ngx-datatable-column>
 
-                        <!-- Column Templates -->
-                        <!-- <ngx-datatable-column name="Expanded" width="80">
-                         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                           <a href="#">hhh</a>
-                         </ng-template>
-                       </ngx-datatable-column> -->
                     </ngx-datatable>
                     <ngx-datatable *ngIf="notFound" class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'">
                         <ngx-datatable-column name="Block Id"></ngx-datatable-column>
-                        <ngx-datatable-column name="Height">
-                        </ngx-datatable-column>
-                        <ngx-datatable-column name="Block Time"></ngx-datatable-column>
+                        <ngx-datatable-column name="Height"></ngx-datatable-column>
+                        <ngx-datatable-column name="Tx Count"></ngx-datatable-column>
+                        <ngx-datatable-column name="Age"></ngx-datatable-column>
                         <ngx-datatable-column name="BlockReward"></ngx-datatable-column>
                         <ngx-datatable-column name="Total Amount"></ngx-datatable-column>
                     </ngx-datatable>
 
                     <ngx-datatable *ngIf="searchFound" class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rows]='rows' [offset]="searchPage.offset" [rowHeight]="'auto'">
-                        <ngx-datatable-column name="Block Id" [sortable]="true">
+                        <ngx-datatable-column name="Block Id" [sortable]="true" [width]="380"></ngx-datatable-column>
+
+                        <ngx-datatable-column name="Height" [sortable]="true" [width]="50">
                             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                <a (click)=blockDetails(row.blockId) title="{{row.blockId}}"> {{row.blockId}}</a>
+                                <a (click)=blockDetails(row.blockId) title="{{row.blockId}}"> {{row.height}}</a>
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Height" [sortable]="true"></ngx-datatable-column>
-                        <ngx-datatable-column name="Block Time" [sortable]="true"></ngx-datatable-column>
-                        <ngx-datatable-column name="BlockReward" [sortable]="true"></ngx-datatable-column>
-                        <ngx-datatable-column name="Total Amount" [sortable]="true"></ngx-datatable-column>
+
+                        <ngx-datatable-column name="Tx Count" [sortable]="true" [width]="20">
+                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                {{row.transactionCount}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column name="Age" [sortable]="true" [width]="100">
+                            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                                {{row.timeAgo}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                     
+                        <ngx-datatable-column name="Block Reward" [sortable]="true" [width]="40"></ngx-datatable-column>
+                        <ngx-datatable-column name="Total Amount" [sortable]="true" [width]="80"></ngx-datatable-column>
                     </ngx-datatable>
                     </div>
                 </div>

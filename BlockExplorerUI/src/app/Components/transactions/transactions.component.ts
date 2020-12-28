@@ -140,9 +140,9 @@ export class TransactionsComponent implements OnInit {
    *
    *
    */
-  searchTransactions(serVal: any) {
+  searchTransactions() {
     let type = 'Transactions';
-    this.searchValue = serVal;
+    this.searchValue = this.searchText;
     this.loadTransactionData (1);
   }
    /**

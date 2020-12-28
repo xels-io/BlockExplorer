@@ -180,10 +180,10 @@ export class LiveDataComponent implements OnInit  {
    *
    *
    */
-  searchOutput(serVal: any) {
+  searchOutput() {
     const type = 'Blocks';
-    const val: any  = serVal.toString().toLowerCase();
-    this.searchVal = this.gridService.searchRows(serVal, type).subscribe((response: any) => {
+    const val: any  = this.searchText.toLowerCase();
+    this.searchVal = this.gridService.searchRows(val, type).subscribe((response: any) => {
       this.dataProcess = false;
       if (response.statusCode === 200 ) {
           this.notFound = false;

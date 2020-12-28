@@ -21,6 +21,7 @@ export class BlockDetailsComponent implements OnInit, OnDestroy  {
 
   ngOnInit() {
     this.blockid = this.route.params['value'].blockid;
+    console.log(this.blockid);
     
     this.gridService.getBlockInfo(this.blockid).subscribe(resp=>{
       this.blockRaw = resp.InnerMsg;

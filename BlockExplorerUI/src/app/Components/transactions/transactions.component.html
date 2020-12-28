@@ -17,10 +17,10 @@
         <div class="row">
             <div class="table-search theme-form col-md-3 offset-md-9">
                 <div class="input-group mb-3">
-                    <input type="text" id="searchBox" class="form-control" placeholder="Search"  [(ngModel)]="searchText" (keyup.enter)='searchTransactions($event.target.value)'>
+                    <input type="text" id="searchBox" class="form-control" placeholder="Search"  [(ngModel)]="searchText" (keyup.enter)='searchTransactions()'>
                     <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button" (click)="clearSerachVal()">
-                            <i class="fa fa-times-circle"></i>
+                        <button class="btn btn-secondary" type="button" (click)="searchTransactions()">
+                            <i class="fa fa-search"></i>
                         </button>
                     </div>
                 </div>
@@ -48,16 +48,16 @@
                         [messages]="'No data found!'"
                         (page)="transactionPage($event)"
                         >
-                        <ngx-datatable-column name="Transaction Id" title="{{txid}}">
+                        <ngx-datatable-column name="Transaction Id" title="{{txid}}" [width]="300">
                             <!-- <a (click)= openDialog(rowTrans)> {{rowTrans.txId}}</a> -->
                           <!-- <a (click)="openDialog(rowTrans)" class="ng-binding color-link" style="color:#10ADE4;cursor: pointer;">{{rowTrans.txId}}</a> -->
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Inputs" title=""></ngx-datatable-column>
-                        <ngx-datatable-column name="Outputs" > {{rowTrans.outputs}}</ngx-datatable-column>
-                        <ngx-datatable-column name="Time" ></ngx-datatable-column>
-                        <ngx-datatable-column name="Details" >
+                        <ngx-datatable-column name="Inputs" title="" [width]="80"></ngx-datatable-column>
+                        <ngx-datatable-column name="Outputs" [width]="100"> {{rowTrans.outputs}}</ngx-datatable-column>
+                        <ngx-datatable-column name="Time" [width]="80"></ngx-datatable-column>
+                        <ngx-datatable-column name="Details" [width]="10">
                             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                <button class="btn btn-secondary" type="button" (click)="openDialogAddress(row)">
+                                <button class="btn btn-outline-success btn-sm" type="button" (click)="openDialogAddress(row)">
                                     Details
                                 </button>
                             </ng-template>

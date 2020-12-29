@@ -264,31 +264,26 @@ export class GridService {
         this.rewardCal = (tmp.blockReward / 100000000 );
         //  tmp.transactions.splice(1, 1);
         return {
+          ...tmp,
           blockId: tmp.hash,
           transactions: tmp.transactions,
-          tx: tmp.tx,
           blockTime: blockTime,
           timeAgo:timeAgo,
           blockReward: (tmp.blockreward / 100000000 ),
-          height: tmp.height,
-
-          confirmations: tmp.confirmations,
+          totalout: (tmp.totalout / 100000000 ),
           transactionCount: tmp.nTx,
-          //  transactions: this.getTransVal(tmp.transactions),
-          
           totalAmount: totalA,
         };
       } else {
         return {
+          ...tmp,
           blockId: tmp.hash,
           blockReward: (tmp.blockreward / 100000000 ),
+          totalout: (tmp.totalout / 100000000 ),
           blockTime: this.timeFormat(tmp.time),
           timeAgo:timeAgo,
-          height: tmp.height,
           totalAmount: totalA,
-          confirmations: tmp.confirmations,
           transactionCount: tmp.nTx,
-          transactions: tmp.transactions
           //  transactions: this.getTransVal(tmp.transactions)
         };
       }

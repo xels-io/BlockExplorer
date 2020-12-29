@@ -12,19 +12,33 @@
                 <div *ngIf="tableData!==undefined">
                     <div class="card-title color-black">
                         <h4>Details for Block #{{tableData.height}}</h4>
+                        <p><b>Hash:</b> {{tableData.blockId}}</p>
                     </div>
                     <div class="row block-details">
-                        <div class="col-lg-5">
+                        <div class="col-12">
                             <div class="card-title color-black">
                                 Summary
                             </div>
+                        </div>
+                        <div class="col-lg-5">
+                            
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-9 p-0">Version</div>
+                                <div class="col-3 p-0 text-right">{{tableData.version}}</div>
+                            </div>
+                            
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-9 p-0">Difficulty</div>
+                                <div class="col-3 p-0 text-right">{{tableData.difficulty}}</div>
+                            </div>
+                            
                             <div class="row item mx-0 mb-3">
                                 <div class="col-9 p-0">Number Of Transactions</div>
                                 <div class="col-3 p-0 text-right">{{tableData.transactions.length}}</div>
                             </div>
                             <div class="row item mx-0 mb-3">
                                 <div class="col-7 p-0">Output Total</div>
-                                <div class="col-5 p-0 text-right">{{tableData.totalAmount}}</div>
+                                <div class="col-5 p-0 text-right">{{tableData.totalout}}</div>
                             </div>
                             <div class="row item mx-0 mb-3">
                                 <div class="col-7 p-0">Block Reward</div>
@@ -32,12 +46,17 @@
                             </div>
                         </div>
                         <div class="col-lg-5 offset-lg-2">
-                            <div class="card-title color-black">
-                                Hashes
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-3 p-0">Nonce</div>
+                                <div class="col-9 p-0 text-right">{{tableData.nonce}}</div>
                             </div>
                             <div class="row item mx-0 mb-3">
-                                <div class="col-3 p-0">Hash</div>
-                                <div class="col-9 p-0">{{tableData.blockId}}</div>
+                                <div class="col-3 p-0">Size</div>
+                                <div class="col-9 p-0 text-right">{{tableData.size}}</div>
+                            </div>
+                            <div class="row item mx-0 mb-3">
+                                <div class="col-3 p-0">Bits</div>
+                                <div class="col-9 p-0 text-right">{{tableData.bits}}</div>
                             </div>
                             <div class="row item mx-0 mb-3">
                                 <div class="col-3 p-0">BlockTime</div>
@@ -48,8 +67,44 @@
                                 <div class="col-5 p-0 text-right">{{tableData.transactions.length}}</div>
                             </div>
                         </div>
+
+                        <div class="col-12 mx-auto">
+                            <div id="accordion">
+                                <div class="card">
+                                  <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0 text-center">
+                                      <button class="btn btn-link text-success" (click)="showMoreBlockInfo()">See More</button>
+                                    </h5>
+                                  </div>
+                              
+                                  <div id="collapseOne" class="collapse {{(show_more)?'show':''}}" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="row item mx-0 mb-3">
+                                            <div class="col-3 p-0">Previous Block Hash</div>
+                                            <div class="col-9 p-0 text-right">{{tableData.previousblockhash}}</div>
+                                        </div>
+            
+                                        <div class="row item mx-0 mb-3">
+                                            <div class="col-3 p-0">Next Block Hash</div>
+                                            <div class="col-9 p-0 text-right">{{tableData.nextblockhash}}</div>
+                                        </div>
+            
+                                        <div class="row item mx-0 mb-3">
+                                            <div class="col-3 p-0">Chain Trust</div>
+                                            <div class="col-9 p-0 text-right">{{tableData.chaintrust}}</div>
+                                        </div>
+            
+                                        <div class="row item mx-0 mb-3">
+                                            <div class="col-3 p-0">Block Trust</div>
+                                            <div class="col-9 p-0 text-right">{{tableData.blocktrust}}</div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center mt-5">
                         <button class="btn btn-success m-1" title="Previous Block" (click)="block(tableData.height-1)"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
                         <button class="btn btn-success m-1" title="Next Block" (click)="block(tableData.height+1)"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                         <div class="text-danger" *ngIf="no">No Block Found!</div>

@@ -29,7 +29,7 @@ nav ul.navbar-nav li.nav-item a.nav-link:focus
     border-color: #fff;
 }
 /* ==============
-   Media Query 
+   Media Query
 ===============*/
 @media only screen and (max-width: 991px)  {
     nav .container {

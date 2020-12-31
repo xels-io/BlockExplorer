@@ -25,6 +25,7 @@ import { AddressAmountComponent } from './Components/address-amount/address-amou
 
 import {MatDialogModule} from '@angular/material/dialog';
 import { RichAddressComponent } from './Components/rich-address/rich-address.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 @NgModule({
    declarations: [
       AppComponent,
@@ -34,6 +35,7 @@ import { RichAddressComponent } from './Components/rich-address/rich-address.com
       ContactComponent,
       AddressAmountComponent,
       RichAddressComponent,
+      NotFoundComponent,
    ],
    imports: [
     HttpClientModule,

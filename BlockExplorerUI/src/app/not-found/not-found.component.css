@@ -1,0 +1,18 @@
+.box-noresults {
+  background-color:whitesmoke;
+  width: 600px;
+  max-width: 100%;
+  margin: 5px auto;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 10px 15px 15px 10px;
+
+}
+.box-noresults .box-icon {
+  margin-bottom: 20px;
+}
+.box-noresults .text {
+  text-transform: uppercase;
+  position: relative;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  ngxSpinnerTimeout:any;
+  constructor(private spinner:NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show("contactLoader")
+    this.ngxSpinnerTimeout=setTimeout(() => {
+      this.spinner.hide("contactLoader");
+    }, 420);
+  }
+
+  ngOnDestroy(){
+    clearTimeout(this.ngxSpinnerTimeout);
   }
 
 }

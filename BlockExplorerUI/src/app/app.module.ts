@@ -1,6 +1,6 @@
 // Import common module
 // import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -26,6 +26,7 @@ import { AddressAmountComponent } from './Components/address-amount/address-amou
 import {MatDialogModule} from '@angular/material/dialog';
 import { RichAddressComponent } from './Components/rich-address/rich-address.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
    declarations: [
       AppComponent,
@@ -37,6 +38,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
       RichAddressComponent,
       NotFoundComponent,
    ],
+   schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+],
    imports: [
     HttpClientModule,
     HttpModule,
@@ -44,6 +48,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserAnimationsModule,
     routingModule,
     MatDialogModule,
+    NgxSpinnerModule,
     SharedModule.forRoot(),
 
    ],

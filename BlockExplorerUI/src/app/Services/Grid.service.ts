@@ -11,7 +11,7 @@ export class GridService {
   public blockRowData: any[];
   public transactionDetailsRow: any[];
   public blockData: any;
-  
+  public timeTransform = moment;
   public baseApiUrl = environment.baseUrl;
   observer: any;
   public handle = new Subject ();
@@ -275,7 +275,7 @@ export class GridService {
           confirmations: tmp.confirmations,
           transactionCount: tmp.nTx,
           //  transactions: this.getTransVal(tmp.transactions),
-          
+
           totalAmount: totalA,
         };
       } else {
@@ -301,15 +301,15 @@ export class GridService {
   *
   */
 
-  /** 
+  /**
    * TotalAmount data calculation starts from transaction amount
   */
  getAmount(transactions) {
-  
+
   // const y: any [] = this.getTransVal(transaction);
   let y = transactions.slice();
   let total = 0;
-  
+
   y.map((tmpTotal) => {
     tmpTotal.vout.map((val) => {
       total = total + val.value;
@@ -348,7 +348,7 @@ export class GridService {
 
     return mapped;
 
-    
+
   }
 
 }

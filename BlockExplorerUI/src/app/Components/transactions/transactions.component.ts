@@ -5,6 +5,7 @@ import {MatDialog, MatDialogConfig } from '@angular/material';
 
 import { AddressAmountComponent } from '../address-amount/address-amount.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import {NgxSpinnerService} from "ngx-spinner";
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
@@ -16,6 +17,7 @@ export class TransactionsComponent implements OnInit {
   transactionArray: any = [];
   rowTrans: any = [];
   searchText: string;
+  timeTransform:any;
   searchTransactionValue: any = [];
   transaction: any = [];
   transactionRows: any = [];
@@ -35,7 +37,7 @@ export class TransactionsComponent implements OnInit {
   };
   transactionFound = false;
   transactionNotFound = false;
-  
+
   public TransactionColumns = [
     { name: 'Transaction Id' },
     { name: 'Inputs' },
@@ -43,14 +45,27 @@ export class TransactionsComponent implements OnInit {
     { name: 'Time' }
   ];
   public searchValue = '';
-  constructor(private Service: GridService , public dialog: MatDialog,private route: ActivatedRoute,private router:Router) { }
+  constructor(private spinner:NgxSpinnerService,private Service: GridService , public dialog: MatDialog,private route: ActivatedRoute,private router:Router) {
+    this.timeTransform= this.Service.timeTransform;
+  }
   /** initialization starts
   *
   *
   */
   ngOnInit() {
-    this.page.pageNumber = (this.route.queryParams['value'].page)?this.route.queryParams['value'].page:1;
-    this.transactionPage({ offset: this.page.pageNumber-1 });
+    this.route.queryParams.subscribe(queryParams=>{
+      this.spinner.show("transactionsLoader")
+      this.dataFound = false;
+      this.dataProcess = true;
+      this.transactionFound = false;
+      this.transactionNotFound = false;
+      if(!queryParams.page){
+        this.searchText="";
+        this.searchValue="";
+      }
+      this.page.pageNumber = parseInt(queryParams.page)?parseInt(queryParams.page):1;
+      this.transactionPage({ offset: this.page.pageNumber-1 });
+    })
    // this.transData();
    // this.loadTransactionData(this.page.pageNumber);
   }
@@ -63,6 +78,7 @@ export class TransactionsComponent implements OnInit {
   *
   */
   loadTransactionData (page) {
+
     this.transaction = this.Service.getTransactions(page,this.searchValue).subscribe((response: any) => {
       this.dataProcess = false;
       if (response.transactions.length > 0 ) {
@@ -163,7 +179,7 @@ export class TransactionsComponent implements OnInit {
       this.searchText = '';
       this.searchValue = '';
       this.loadTransactionData(1);
-      
+
     }
   }
    /**

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,OnChanges, SimpleChanges } from '@angular/core';
 import { GridService } from 'src/app/Services/Grid.service';
 
 import {  Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { TransactionDetailComponent } from '../transaction-detail/transaction-de
   styleUrls: ['./transactioncard.component.css']
 })
 
-export class TransactioncardComponent implements OnInit {
+export class TransactioncardComponent implements OnInit,OnChanges {
 
   cardData:Array<any> = [];
   blockData:Array<any> = [];
@@ -27,7 +27,14 @@ export class TransactioncardComponent implements OnInit {
 
   constructor(private service: GridService,  private router: Router, public dialog: MatDialog) {
    }
-   
+  ngOnChanges(changes: SimpleChanges): void {
+    this.service.getBlockInfo(this.blockid).subscribe(resp=>{
+      let blockData = this.service.getMappedData([resp.InnerMsg])
+      this.blockData = blockData[0];
+      this.cardData = this.service.getTransactionDataMapped(this.blockData['transactions']);
+    })
+  }
+
    /** initialization starts
   *
   *
@@ -76,7 +83,7 @@ export class TransactioncardComponent implements OnInit {
    *
    *
    */
-   
+
  /**
    *  Total value calculation  ends
    *

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-not-found',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor() { }
+  ngxSpinnerTimeout:any;
+  constructor(private spinner:NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show("notFoundLoader")
+    this.ngxSpinnerTimeout=setTimeout(() => {
+      this.spinner.hide("notFoundLoader");
+    }, 1550);
+  }
+
+  ngOnDestroy(){
+    clearTimeout(this.ngxSpinnerTimeout);
   }
 
 }

@@ -1,14 +1,18 @@
-import { Component,  OnInit  } from '@angular/core';
+import { Component,  OnInit,OnChanges, SimpleChanges,OnDestroy  } from '@angular/core';
 import { GridService } from '../../Services/Grid.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {interval} from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {NgxSpinnerService} from "ngx-spinner";
 @Component ({
   selector: 'app-live-data',
   templateUrl: './LiveData.component.html',
   styleUrls: ['./LiveData.component.css']
 })
-export class LiveDataComponent implements OnInit  {
+export class LiveDataComponent implements OnInit,OnChanges,OnDestroy  {
+
+  queryParamUnload:any;
+  intervalSubscribe:any;
   searchForm: FormGroup;
   searchText: string;
   addTaskValue = '';
@@ -48,9 +52,12 @@ export class LiveDataComponent implements OnInit  {
       totalElements: 0
     };
 
-  constructor( private  gridService: GridService, private route: ActivatedRoute, private router: Router , ) {
+  constructor( private spiner: NgxSpinnerService,private  gridService: GridService, private route: ActivatedRoute, private router: Router , ) {
     this.cols = this.BlockGridColumns;
     this.dataFound = true;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("change")
   }
 
 
@@ -59,12 +66,22 @@ export class LiveDataComponent implements OnInit  {
     *
     */
   ngOnInit() {
-    this.page.pageNumber = (this.route.queryParams['value'].page)?this.route.queryParams['value'].page:1;
-    this.pageCallback({ offset: this.page.pageNumber-1 });
-    interval(150000).subscribe(() => {
-      this.getRestBlockData(this.lastHeight);
-      }
-    );
+    // this.page.pageNumber = (this.route.queryParams['value'].page)?this.route.queryParams['value'].page:1;
+    this.queryParamUnload=this.route.queryParams.subscribe(queryparam=>{
+      this.spiner.show("liveloader");
+      this.page.pageNumber= queryparam.page?parseInt(queryparam.page):1;
+      this.searchText="";
+      this.rows=[];
+      this.searchFound = false;
+      this.notFound = false;
+      this.dataFound = false;
+      this.dataProcess = true;
+      this.pageCallback({ offset: this.page.pageNumber-1 });
+       this.intervalSubscribe=interval(150000).subscribe(() => {
+        this.getRestBlockData(this.lastHeight);
+        }
+      );
+    });
   }
   /** initialization ends
     *
@@ -108,6 +125,7 @@ export class LiveDataComponent implements OnInit  {
        // this.gridService.blockRowDataAll = response.InnerMsg;
         this.rows = this.gridService.getMappedData(response.blocksArray);
        // this.gridService.blockRowDataAll = this.rows;
+       console.log(this.rows)
       }
     });
   }
@@ -223,6 +241,9 @@ export class LiveDataComponent implements OnInit  {
    */
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {
+    console.log("destroy");
+    this.queryParamUnload.unsubscribe();
+    this.intervalSubscribe.unsubscribe();
     if (this.subs) {
       this.subs.unsubscribe();
     }

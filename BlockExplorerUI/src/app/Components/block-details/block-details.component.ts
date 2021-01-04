@@ -3,7 +3,6 @@ import { GridService } from '../../Services/Grid.service';
 import { ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { RawComponent } from '../raw/raw.component';
-
 @Component ({
   selector: 'app-block-details',
   templateUrl: './block-details.component.html',
@@ -15,19 +14,20 @@ export class BlockDetailsComponent implements OnInit, OnDestroy  {
   blockid: any;
   blockData: any;
   blockRaw: any;
+  paramSubscription:any;
   constructor(public gridService: GridService,private route:ActivatedRoute, public dialog: MatDialog) {
-
-  }
-
-  ngOnInit() {
-    this.blockid = this.route.params['value'].blockid;
-    console.log(this.blockid);
-    
+    this.paramSubscription= this.route.params.subscribe(params=>{
+      this.blockid = params.blockid;
     this.gridService.getBlockInfo(this.blockid).subscribe(resp=>{
       this.blockRaw = resp.InnerMsg;
       let blockData = this.gridService.getMappedData([resp.InnerMsg]);
       this.blockData = blockData[0];
     })
+    })
+  }
+
+  ngOnInit() {
+
   }
 
   showRawBlock() {
@@ -42,10 +42,11 @@ export class BlockDetailsComponent implements OnInit, OnDestroy  {
       //console.log(`Dialog result: ${result}`);
     });
   }
-  
+
   getVal(val) {
   }
   ngOnDestroy() {
+    this.paramSubscription.unsubscribe();
   }
 
 }

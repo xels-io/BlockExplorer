@@ -10,6 +10,7 @@ import { AddressAmountComponent } from './Components/address-amount/address-amou
 import { RichAddressComponent } from './Components/rich-address/rich-address.component';
 import { BlockDetailsComponent } from './Components/block-details/block-details.component';
 import { RawComponent } from './Components/raw/raw.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
  const routes: Routes = [
     // { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -21,6 +22,7 @@ import { RawComponent } from './Components/raw/raw.component';
     { path: 'transaction/:address', component: TransactionDetailComponent },
     { path: 'blocks/raw/:hash', component: RawComponent },
     { path: 'transaction/:txId', component: AddressAmountComponent },
+    {path:"**",component:NotFoundComponent}
 
   ];
   export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);

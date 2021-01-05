@@ -1,7 +1,7 @@
 
 
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 // import {NgxTabModule} from '../Components/Tab/ngx-tab/ngx-tab.module';
@@ -19,6 +19,8 @@ import { LiveDataComponent } from '../Components/LiveData/LiveData.component';
 
 import { AboutComponent } from '../Components/about/about.component';
  import { FormsModule } from '@angular/forms';
+ import {NgxSpinnerModule} from "ngx-spinner";
+
 
 
 import { TransactionDetailComponent } from '../Components/transaction-detail/transaction-detail.component';
@@ -44,7 +46,8 @@ const COM_ARRAY =
     NgxDatatableModule,
     DataTableModule,
     BlockDetailModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule
   ],
   exports: [
     COM_ARRAY,
@@ -53,8 +56,9 @@ const COM_ARRAY =
     DataTableModule,
     BlockDetailModule,
     FormsModule
-   
+
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [
 
   ],

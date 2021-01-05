@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  selector: 'app-not-found',
+  templateUrl: './not-found.component.html',
+  styleUrls: ['./not-found.component.css']
 })
-export class ContactComponent implements OnInit {
+export class NotFoundComponent implements OnInit {
 
   ngxSpinnerTimeout:any;
   constructor(private spinner:NgxSpinnerService) { }
 
   ngOnInit() {
-    this.spinner.show("contactLoader")
+    this.spinner.show("notFoundLoader")
     this.ngxSpinnerTimeout=setTimeout(() => {
-      this.spinner.hide("contactLoader");
-    }, 420);
+      this.spinner.hide("notFoundLoader");
+    }, 1550);
   }
 
   ngOnDestroy(){

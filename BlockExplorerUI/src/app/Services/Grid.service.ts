@@ -11,7 +11,7 @@ export class GridService {
   public blockRowData: any[];
   public transactionDetailsRow: any[];
   public blockData: any;
-  
+  public timeTransform = moment;
   public baseApiUrl = environment.baseUrl;
   observer: any;
   public handle = new Subject ();
@@ -264,26 +264,31 @@ export class GridService {
         this.rewardCal = (tmp.blockReward / 100000000 );
         //  tmp.transactions.splice(1, 1);
         return {
-          ...tmp,
           blockId: tmp.hash,
           transactions: tmp.transactions,
+          tx: tmp.tx,
           blockTime: blockTime,
           timeAgo:timeAgo,
           blockReward: (tmp.blockreward / 100000000 ),
-          totalout: (tmp.totalout / 100000000 ),
+          height: tmp.height,
+
+          confirmations: tmp.confirmations,
           transactionCount: tmp.nTx,
+          //  transactions: this.getTransVal(tmp.transactions),
+
           totalAmount: totalA,
         };
       } else {
         return {
-          ...tmp,
           blockId: tmp.hash,
           blockReward: (tmp.blockreward / 100000000 ),
-          totalout: (tmp.totalout / 100000000 ),
           blockTime: this.timeFormat(tmp.time),
           timeAgo:timeAgo,
+          height: tmp.height,
           totalAmount: totalA,
+          confirmations: tmp.confirmations,
           transactionCount: tmp.nTx,
+          transactions: tmp.transactions
           //  transactions: this.getTransVal(tmp.transactions)
         };
       }
@@ -296,15 +301,15 @@ export class GridService {
   *
   */
 
-  /** 
+  /**
    * TotalAmount data calculation starts from transaction amount
   */
  getAmount(transactions) {
-  
+
   // const y: any [] = this.getTransVal(transaction);
   let y = transactions.slice();
   let total = 0;
-  
+
   y.map((tmpTotal) => {
     tmpTotal.vout.map((val) => {
       total = total + val.value;
@@ -343,7 +348,7 @@ export class GridService {
 
     return mapped;
 
-    
+
   }
 
 }

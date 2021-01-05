@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlockDetailsComponent } from '../../block-details/block-details.component';
 // import {TableModule} from '../../block-table/table/table.module';
@@ -19,6 +19,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import { RawComponent } from '../../raw/raw.component';
+import {NgxSpinnerModule} from "ngx-spinner";
 const routes: Routes = [
 
   { path: 'blocks/:blockid', component: BlockDetailsComponent },
@@ -35,11 +36,15 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MatCardModule,
     MatDividerModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxSpinnerModule
   ],
-
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+],
   declarations: [BlockDetailsComponent,  BlockpageComponent, TransactioncardComponent, TransactionDetailComponent,RawComponent],
   exports: [ BlockDetailsComponent, BlockpageComponent, TransactioncardComponent,TransactionDetailComponent, RouterModule],
  // providers: [GridService]
+
 })
 export class BlockDetailModule { }

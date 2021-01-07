@@ -100,7 +100,6 @@ export class TransactionsComponent implements OnInit {
   *
   */
    transactionData(transactionArray) {
-     console.log('transactionArray',transactionArray);
     this.rowTrans = transactionArray.map((tmp) => {
       let totalOut = 0;
       tmp.vout.map((val) => {
@@ -114,7 +113,7 @@ export class TransactionsComponent implements OnInit {
 
       for(let i in tmp.vin){
         let vin = tmp.vin[i];
-        inputs = ((vin.scriptPubKey)?vin.scriptPubKey.addresses[0]:'N/A')+' '+((vin.value)?vin.value:'');
+        inputs = ((vin.txid)?vin.txid:'N/A');
       }
       return {
         inputs: inputs,

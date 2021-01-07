@@ -15,7 +15,7 @@ export class BlockpageComponent implements OnInit {
 
   @Input() tableData;
   no = false;
-
+  show_more = false;
    subscription: Subscription;
   ngxSpinnerTimeout: any;
   constructor(private router:Router,private spinner:NgxSpinnerService,public gridService: GridService) {
@@ -43,6 +43,9 @@ export class BlockpageComponent implements OnInit {
         this.no = true;
       }
     })
+  }
+  showMoreBlockInfo(){
+    this.show_more = !this.show_more;
   }
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {

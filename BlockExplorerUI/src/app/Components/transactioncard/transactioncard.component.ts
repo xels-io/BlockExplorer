@@ -35,6 +35,9 @@ export class TransactioncardComponent implements OnInit,OnChanges {
     })
   }
 
+   handleCollaspe(i){
+    this.toggle[i] = !this.toggle[i]
+   }
    /** initialization starts
   *
   *

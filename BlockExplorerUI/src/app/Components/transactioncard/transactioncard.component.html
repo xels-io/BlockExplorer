@@ -8,7 +8,7 @@
                          <div id="transcationId" class="mb-3">
                             <div class="row">
                                 <div class="col-md-10 mb-md-0 mb-3">
-                                    <button class="btn btn-success mr-3" (click)="toggle[i] = !toggle[i]">
+                                    <button class="btn btn-success mr-3"  (click)="handleCollaspe(i)">
                                         <i class="fa" aria-hidden="true" [ngClass]="toggle[i] ? 'fa-minus': 'fa-plus'" ></i>
                                     </button>
                                     <a (click)="openTransactionDetail(item)" class="ng-binding color-link" style="color:#10ADE4;cursor: pointer;">{{item.txId}}</a>

@@ -11,11 +11,12 @@
                             Transaction Id
                         </div>
                         <div class=" item mb-3 p-2">
-                            {{transDetail.transactionId}}
+                            {{transDetail.transactionId}} <span matTooltip="copy to clip board"
+                            matTooltipPosition="right" class="p-1 cursor-pointer" ngxClipboard [cbContent]="transDetail.transactionId" (cbOnSuccess)="copySuccess($event)"><i class="fa fa-copy"></i></span>
                         </div>
 
                         <div class=" item mx-0 mb-3">
-                            <table class="table table-striped" id="addressGrid"  >
+                            <table class="table" id="addressGrid"  >
                                 <thead>
                                 <tr>
                                     <th>Vout</th>
@@ -42,7 +43,7 @@
 
 </section>
 <mat-dialog-actions align="end">
-    <button class="btn btn-success" mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+    <button class="btn btn-grad" mat-button [mat-dialog-close]="true" cdkFocusInitial>close</button>
 </mat-dialog-actions>
 
 

@@ -2,6 +2,11 @@ import { Component, OnInit,Inject } from '@angular/core';
 import { MAT_DIALOG_DATA} from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GridService } from 'src/app/Services/Grid.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-address-amount',
   templateUrl: './address-amount.component.html',
@@ -18,7 +23,9 @@ export class AddressAmountComponent implements OnInit {
 
     transDetail: any;
     blockDetails: any ;
-  constructor(private service: GridService , private route: ActivatedRoute , @Inject(MAT_DIALOG_DATA) public data: any) { }
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  constructor(private _snackBar: MatSnackBar,private service: GridService , private route: ActivatedRoute , @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
     this.transDetail = this.data.data;
@@ -27,6 +34,18 @@ export class AddressAmountComponent implements OnInit {
      // console.log(this.transDetail.vIn);
     }
 
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Copied!!', '', {
+      duration: 400,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+  copySuccess(e){
+    console.log(e);
+    this.openSnackBar();
   }
 
 }

@@ -22,11 +22,13 @@ import { TransactionsComponent } from './Components/transactions/transactions.co
 import { ContactComponent } from './Components/contact/contact.component';
 import { AddressAmountComponent } from './Components/address-amount/address-amount.component';
 // import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
-
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { RichAddressComponent } from './Components/rich-address/rich-address.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {ClipboardModule} from "ngx-clipboard";
 @NgModule({
    declarations: [
       AppComponent,
@@ -48,7 +50,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     BrowserAnimationsModule,
     routingModule,
     MatDialogModule,
+    MatTooltipModule,
     NgxSpinnerModule,
+    MatSnackBarModule,
+    ClipboardModule,
     SharedModule.forRoot(),
 
    ],

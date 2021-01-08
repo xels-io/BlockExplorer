@@ -18,8 +18,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { RawComponent } from '../../raw/raw.component';
 import {NgxSpinnerModule} from "ngx-spinner";
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {ClipboardModule} from "ngx-clipboard";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 const routes: Routes = [
 
   { path: 'blocks/:blockid', component: BlockDetailsComponent },
@@ -29,7 +34,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-
     HttpClientModule,
     HttpModule,
     BrowserModule,
@@ -37,7 +41,11 @@ const routes: Routes = [
     MatCardModule,
     MatDividerModule,
     MatDialogModule,
-    NgxSpinnerModule
+    MatExpansionModule,
+    NgxSpinnerModule,
+    MatTooltipModule,
+    ClipboardModule,
+    MatSnackBarModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

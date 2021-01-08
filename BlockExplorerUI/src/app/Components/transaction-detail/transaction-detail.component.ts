@@ -2,7 +2,11 @@ import { Component, OnInit , Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GridService } from 'src/app/Services/Grid.service';
 import { MAT_DIALOG_DATA} from '@angular/material';
-
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-transaction-detail',
@@ -13,7 +17,9 @@ import { MAT_DIALOG_DATA} from '@angular/material';
 export class TransactionDetailComponent implements OnInit {
   transDetail: any;
   blockDetails: any ;
-  constructor(private service: GridService , private route: ActivatedRoute , @Inject(MAT_DIALOG_DATA) public data: any ) {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  constructor(private _snackBar: MatSnackBar,private service: GridService , private route: ActivatedRoute , @Inject(MAT_DIALOG_DATA) public data: any ) {
   }
 
   ngOnInit() {
@@ -24,5 +30,15 @@ export class TransactionDetailComponent implements OnInit {
        this.transDetail =  this.service.transaction;
     }
   }
-
+  openSnackBar() {
+    this._snackBar.open('Copied!!', '', {
+      duration: 400,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+  copySuccess(e){
+    console.log(e);
+    this.openSnackBar();
+  }
 }

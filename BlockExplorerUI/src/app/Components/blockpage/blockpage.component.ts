@@ -5,7 +5,11 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {MatDialog} from '@angular/material';
 import {Router} from "@angular/router";
 import { TransactionDetailComponent } from '../transaction-detail/transaction-detail.component';
-
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-blockpage',
   templateUrl: './blockpage.component.html',
@@ -18,7 +22,9 @@ export class BlockpageComponent implements OnInit {
   show_more = false;
    subscription: Subscription;
   ngxSpinnerTimeout: any;
-  constructor(private router:Router,private spinner:NgxSpinnerService,public gridService: GridService) {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  constructor(private _snackBar: MatSnackBar,private router:Router,private spinner:NgxSpinnerService,public gridService: GridService) {
   }
   getDataBlock() {
 
@@ -46,6 +52,17 @@ export class BlockpageComponent implements OnInit {
   }
   showMoreBlockInfo(){
     this.show_more = !this.show_more;
+  }
+  copySuccess(e){
+    console.log(e);
+    this.openSnackBar();
+  }
+  openSnackBar() {
+    this._snackBar.open('Copied!!', '', {
+      duration: 400,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {

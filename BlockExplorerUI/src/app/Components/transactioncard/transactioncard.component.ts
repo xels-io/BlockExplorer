@@ -5,7 +5,11 @@ import {  Router } from '@angular/router';
 import {MatDialog, MatDialogConfig } from '@angular/material';
 import { TransactionDetailComponent } from '../transaction-detail/transaction-detail.component';
 
-
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-transactioncard',
@@ -24,8 +28,10 @@ export class TransactioncardComponent implements OnInit,OnChanges {
   outputVal = false;
   toggle = [];
   public buttonName: any = 'fa fa-plus';
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  constructor(private service: GridService,  private router: Router, public dialog: MatDialog) {
+  constructor(private _snackBar: MatSnackBar,private service: GridService,  private router: Router, public dialog: MatDialog) {
    }
   ngOnChanges(changes: SimpleChanges): void {
     this.service.getBlockInfo(this.blockid).subscribe(resp=>{
@@ -33,6 +39,14 @@ export class TransactioncardComponent implements OnInit,OnChanges {
       this.blockData = blockData[0];
       this.cardData = this.service.getTransactionDataMapped(this.blockData['transactions']);
     })
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Copied!!', '', {
+      duration: 400,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
    handleCollaspe(i){
@@ -55,6 +69,15 @@ export class TransactioncardComponent implements OnInit,OnChanges {
       //this.dataIn = this.blockData;
     }
   }
+
+  // clip board success
+
+  copySuccess(e){
+    console.log(e);
+    this.openSnackBar();
+  }
+
+
   /** initialization ends
   *
   *

@@ -20,7 +20,8 @@ import { LiveDataComponent } from '../Components/LiveData/LiveData.component';
 import { AboutComponent } from '../Components/about/about.component';
  import { FormsModule } from '@angular/forms';
  import {NgxSpinnerModule} from "ngx-spinner";
-
+ import {MatTooltipModule} from '@angular/material/tooltip';
+ import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 import { TransactionDetailComponent } from '../Components/transaction-detail/transaction-detail.component';
@@ -47,7 +48,9 @@ const COM_ARRAY =
     DataTableModule,
     BlockDetailModule,
     FormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatTooltipModule,
+    MatSnackBarModule
   ],
   exports: [
     COM_ARRAY,
@@ -55,7 +58,8 @@ const COM_ARRAY =
     NgxDatatableModule,
     DataTableModule,
     BlockDetailModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
 
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],

@@ -8,8 +8,23 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 @font-face {
+    font-family: 'Gilroy-Light';
+    src: url("../fonts/Gilroy-Light.otf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Gilroy-Bold';
+    src: url("../fonts/Gilroy-ExtraBold.otf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
     font-family: 'Montserrat-Regular';
     src: url("../fonts/Montserrat-Regular.ttf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'OpenSan-Regular';
+    src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
     font-weight: normal;
 }
 @font-face {
@@ -18,12 +33,27 @@
     font-weight: normal;
 }
 @font-face {
+    font-family: 'OpenSan-Light';
+    src: url("../fonts/OpenSans-Light.ttf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
     font-family: 'Montserrat-Bold';
     src: url("../fonts/Montserrat-Bold.ttf") format("truetype");
     font-weight: normal;
 }
 @font-face {
+  font-family: 'OpenSan-Bold';
+  src: url("../fonts/OpenSans-Bold.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
     font-family: 'Montserrat-LightItalic';
+    src: url("../fonts/Montserrat-LightItalic.ttf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'OpenSan-LightItalic';
     src: url("../fonts/Montserrat-LightItalic.ttf") format("truetype");
     font-weight: normal;
 }
@@ -80,7 +110,7 @@ body {
     background-position: center top -20%;
     background-repeat: no-repeat;
     /*background-size: cover;*/
-    font-family: 'Montserrat-Regular';
+    font-family: 'Gilroy-Light, OpenSan-Regular, Arial, Helvetica, Sans-Serif, Montserrat-Regular';
     font-size: 14px;
     padding-top: 75px;
 }
@@ -104,14 +134,14 @@ a, .btn, a:hover, .btn:hover {
     transition: all 0.25s ease-in-out 0s;
 }
 .color-black {
-    color: #969696 !important;
+    color: #000000 !important;
 }
 section {
     padding: 35px 0;
 }
 .title {
     color: #FFFFFF;
-    font-family: 'Montserrat-Bold';
+    font-family: 'Gilroy-Light, OpenSan-Regular, Arial, Helvetica, Sans-Serif, Montserrat-Regular';
     font-size: 48px;
 }
 section.home-section .datatable-body-cell a:hover,
@@ -177,11 +207,13 @@ section.home-section .datatable-body-cell a:focus
     border-radius: 25px;
 }
 .theme-table {
-    color: #2F2F2F;
+    color: #000000;
 }
 .theme-table .datatable-header-cell-label.draggable {
-    color: #969696;
-    font-family: 'Montserrat-Bold';
+    color: #000000;
+    font-family: 'Gilroy-Light, OpenSan-Regular, Arial, Helvetica, Sans-Serif, Montserrat-Regular';
+    font-weight: 700;
+    font-size: 14px;
 }
 .theme-table .datatable-body-cell {
     /*overflow-wrap: break-word;*/
@@ -226,7 +258,7 @@ section.home-section .datatable-body-cell a:focus
 .ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group .datatable-body-cell a
 {
     color: #FFFFFF;
-    font-family: 'Montserrat-Bold';
+    font-family: 'Gilroy-Light, OpenSan-Regular, Arial, Helvetica, Sans-Serif, Montserrat-Regular';
 }
 
 /* ==============
@@ -247,9 +279,9 @@ section.home-section .datatable-body-cell a:focus
     border-top-right-radius: 25px;
 }
 .theme-card .card-title {
-    color: #969696;
-    font-family: 'Montserrat-Bold';
-    padding: 10px 10px 0 10px;
+    color: #000000;
+    font-family: 'Gilroy-Light, OpenSan-Regular, Arial, Helvetica, Sans-Serif, Montserrat-Regular';
+    padding: 30px 3px 0 3px;
 }
 .theme-card .card-body {
     padding: 35px 60px 70px;
@@ -279,6 +311,31 @@ section.home-section .datatable-body-cell a:focus
 .highlight-box-success{
     color: #28a745;
     border-color: #28a745;
+}
+
+
+
+.btn-grad {background-image: linear-gradient(to right, #1D976C 0%, #93F9B9  51%, #1D976C  100%)}
+.btn-grad {
+
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;
+   box-shadow: 0 0 20px #eee;
+   /* border-radius: 10px; */
+   display: block;
+ }
+
+ .btn-grad:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+.cursor-pointer{
+  cursor: pointer;
 }
 /* ==============
    Media Query

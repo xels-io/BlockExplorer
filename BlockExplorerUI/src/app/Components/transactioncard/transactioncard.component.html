@@ -4,14 +4,18 @@
             <div class="card-body">
                 <div id="TransactionsDiv" *ngIf="cardData && cardData.length">
                     <h4>Transactions ({{cardData.length}})</h4>
+
                     <div class="example-card" dynamicHeight="true" *ngFor="let item of cardData;let i=index">
                          <div id="transcationId" class="mb-3">
                             <div class="row">
                                 <div class="col-md-10 mb-md-0 mb-3">
-                                    <button class="btn btn-success mr-3"  (click)="handleCollaspe(i)">
+                                    <span class="btn btn-link color-black"  (click)="handleCollaspe(i)">
                                         <i class="fa" aria-hidden="true" [ngClass]="toggle[i] ? 'fa-minus': 'fa-plus'" ></i>
-                                    </button>
-                                    <a (click)="openTransactionDetail(item)" class="ng-binding color-link" style="color:#10ADE4;cursor: pointer;">{{item.txId}}</a>
+                                    </span>
+                                    <a (click)="openTransactionDetail(item)"  class="ng-binding color-link" style="color:#10ADE4;cursor: pointer;">{{item.txId}}</a>
+                                    <span matTooltip="copy to clip board"
+                                    matTooltipPosition="right" class="p-1 cursor-pointer" ngxClipboard [cbContent]="item.txId" (cbOnSuccess)="copySuccess($event)"><i class="fa fa-copy"></i></span>
+
                                 </div>
                                 <div class="col-md-2 mb-md-0 mb-3">
                                     {{ item.time}}
@@ -80,8 +84,12 @@
                         </div>
                         <!-- <mat-divider></mat-divider> -->
                         <div class="text-right">
-                            <span id="confirm" class="highlight-box highlight-box-info mr-3" mat-button>{{blockData.confirmations}} Confirmations</span>
-                            <span id="coin" class="highlight-box highlight-box-success" mat-button>{{item.totalVOut}} Xels</span>
+                            <span class="tx-item-footer-additional-box">
+                              {{blockData.confirmations}} Confirmations
+                                          </span>
+                            <span class="tx-item-footer-additional-box">
+                              {{item.totalVOut}} Xels
+                                          </span>
                         </div>
                     </div>
                 </div>

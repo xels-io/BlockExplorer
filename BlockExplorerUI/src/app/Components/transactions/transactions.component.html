@@ -64,7 +64,7 @@
                         <ngx-datatable-column name="Time" [width]="80"></ngx-datatable-column>
                         <ngx-datatable-column name="Details" [width]="10">
                             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                                <button class="btn "  matTooltip="transactions details"
+                                <button class="btn btn-xs"  matTooltip="transactions details"
                                 matTooltipPosition="right"
                                 aria-label="button that show transactions details modal" type="button" (click)="openDialogAddress(row)">
                                   <i class="fa fa-eye"></i>

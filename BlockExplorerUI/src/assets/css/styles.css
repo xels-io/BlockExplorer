@@ -359,3 +359,12 @@ section.home-section .datatable-body-cell a:focus
 }
 @media only screen and (max-width: 575px)  {
 }
+.btn-xs{
+    padding: 1px 5px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    border-radius: 3px !important;
+}
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell{
+    padding: 0.4rem 1.2rem;
+}

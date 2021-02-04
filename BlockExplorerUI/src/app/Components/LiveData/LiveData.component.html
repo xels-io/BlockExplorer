@@ -31,7 +31,7 @@
                     <!-- <div class="d-flex justify-content-center" *ngIf="dataProcess">
                         <div class="spinner-border text-white" style="width: 10rem; height: 10rem;" role="status"></div>
                     </div> -->
-                    <div *ngIf="!dataProcess">
+                    <div *ngIf="!dataProcess" class="">
                         <ngx-datatable *ngIf="dataFound" #table class='material striped'
                         [rowHeight]="36"
                         [width]="700"
@@ -49,7 +49,7 @@
                         (page)="pageCallback($event)">
 
 
-                        <ngx-datatable-column name="Block Id" [sortable]="true" [width]="380"></ngx-datatable-column>
+                        <ngx-datatable-column name="Block Id" [sortable]="true" [width]="380" class="align-middle"></ngx-datatable-column>
 
                         <ngx-datatable-column  name="Height" [sortable]="true" [width]="50">
                             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>

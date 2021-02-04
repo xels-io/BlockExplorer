@@ -22,6 +22,7 @@ export class BlockDetailsComponent implements OnInit, OnDestroy  {
       this.blockRaw = resp.InnerMsg;
       let blockData = this.gridService.getMappedData([resp.InnerMsg]);
       this.blockData = blockData[0];
+      console.log(this.blockData)
     })
     })
   }

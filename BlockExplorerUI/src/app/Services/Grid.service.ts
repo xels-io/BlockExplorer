@@ -264,6 +264,7 @@ export class GridService {
         this.rewardCal = (tmp.blockReward / 100000000 );
         //  tmp.transactions.splice(1, 1);
         return {
+          ...tmp,
           blockId: tmp.hash,
           transactions: tmp.transactions,
           tx: tmp.tx,
@@ -280,6 +281,7 @@ export class GridService {
         };
       } else {
         return {
+          ...tmp,
           blockId: tmp.hash,
           blockReward: (tmp.blockreward / 100000000 ),
           blockTime: this.timeFormat(tmp.time),
